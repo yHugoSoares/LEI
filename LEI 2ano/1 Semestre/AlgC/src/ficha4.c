@@ -172,15 +172,134 @@ int homomorfOK (GrafoL g, GrafoL h, int f[]) {
     return 1;
 }
 
-int main() {
-    GrafoL in = {NULL}, out = {NULL};
-    
-    create_exemploL(in);
-    
-    inverte(in, out);
-    
+int DF (GrafoL g, int or, int v[], int p[], int l[]) {
+    int i;
+    for (i=0; i<NV; i++) {
+        v[i]=0;
+        p[i] = -1;
+        l[i] = -1;
+    }
+    p[or] = -1; l[or] = 0;
+    return DFRec (g,or,v,p,l);
+}
 
-    printf("inDegree: %d\n", inDegree(in));
+int DFRec (GrafoL g, int or, int v[], int p[], int l[]) {
+    int i; LAdj a;
+    i=1;
+    v[or]=-1;
+    for (a=g[or]; a!=NULL; a=a->prox)
+    if (!v[a->dest]){
+        p[a->dest] = or;
+        l[a->dest] = 1+l[or];
+        i+=DFRec(g,a->dest,v,p,l);
+    }
+    v[or]=1;
+    return i;
+}
+
+int BF (GrafoL g, int or, int v[], int p[], int l[]) {
+    int i, x; LAdj a;
+    int q[NV], front, end;
+    for (i=0; i<NV; i++) {
+        v[i]=0;
+        p[i] = -1;
+        l[i] = -1;
+    }
+    front = end = 0;
+    q[end++] = or; //enqueue
+    v[or] = 1; l[or]=0; p[or]=-1; //redundante
+    i=1;
+    while (front != end){
+        x = q[front++]; //dequeue
+        for (a=g[x]; a!=NULL; a=a->prox)
+        if (!v[a->dest]) {
+            i++;
+            v[a->dest]=1;
+            p[a->dest]=x;
+            l[a->dest]=1+l[x];
+            q[end++]=a->dest; //enqueue
+        }   
+    }
+    return i;
+}
+
+int maisLonga (GrafoL g, int or, int p[]) {
+    int v[NV], l[NV];
+    DF(g, or, v, p, l);
+
+    int maxDistance = -1;
+    int furthestVertex = -1;
+
+    for (int i = 0; i < NV; i++)
+    {
+        if (v[i] && l[i] > maxDistance)
+        {
+            maxDistance = l[i];
+            furthestVertex = i;
+        }
+    }
+    
+    return maxDistance;
+}
+
+int ciclo (GrafoL g, int c[]) {
+    int v[NV], p[NV], l[NV];
+    for (int i = 0; i < NV; i++)
+    {
+        c[0] = i;
+        LAdj temp = g[i];
+        while (temp != NULL)
+        {
+            int counter = 1;
+            if (v[temp->dest] == -1)
+            {
+                c[counter] = temp->dest;
+                return c;
+            }
+            c[counter] = temp->dest;
+            v[temp->dest] = -1;
+            counter++;
+            temp = temp->prox;
+        }
+    }
+    
+    return 0;
+}
+
+int ciclo2 (GrafoL g, int c[]) {
+    int v[NV], p[NV], l[NV];
+    for (int i = 0; i < NV; i++)
+    {
+        v[i] = 0;
+        p[i] = -1;
+    }
+
+    for (int i = 0; i < NV; i++)
+    {
+        if (!v[i])
+        {
+            if (cicloRec(g, i, c, v, p))
+            {
+                return 1;
+            }
+            
+        }
+        
+    }
+    
+    
+    return 0;
+}
+
+
+int main() {
 
     return 0;
 }
+
+
+
+// Questions: 
+// 1. um veneno estragado mata mais ou menos ? mais ou menos o que ?
+// 2. as zebras sao brancas com listras pretas ou pretas com listras brancas ? branca com listras pretas
+// 3. se as mulheres estao sempre certas pq e que escolhes o homem errado ? certo
