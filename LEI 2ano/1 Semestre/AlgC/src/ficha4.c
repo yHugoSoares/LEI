@@ -350,13 +350,62 @@ return r;
 
 int excentricidadeV (GrafoL g, int v) {
     int pais[NV], pesos[NV];
+    int max = 0;
     int nodes = dijkstraSP(g, v, pais, pesos);
-    
+    for (int i = 0; i < NV; i++)
+    {
+        if (max <= pesos[i])
+        {
+            max = pesos[i];
+        }   
+    }
+    return max;
+}
+
+int dijkstraSP2 (GrafoL g, int or, int pais[], int pesos[], int valor) {
+    int r, i, v, cor [NV], orla[NV], tam;
+    LAdj x;
+    // inicializacoes
+    for (i=0; i<NV; i++) {
+        pais[i] = -2; cor[i] = 0 ; // nao visitado
+    }
+    r = 0; orla[0] = or; tam = 1;
+    pesos[or] = 0; pais[or] = -1; cor [or] = 1; // na orla
+    // ciclo
+    while (tam>0) {
+        // seleccionar vertice de menor peso
+        i = minIndPeso (orla, pesos, tam);
+        swap (orla, i, --tam);
+        v = orla[tam];
+        r++; cor[v] = 2; //visitado
+        for (x=g[v]; x!=NULL; x=x->prox){
+            if (cor[x->dest] == 0 && x->custo < valor) {
+                cor[x->dest] = 1; orla[tam++] = x->dest;
+                pais[x->dest] = v;
+                pesos[x->dest] = pesos[v] + x->custo;
+            }
+            else if (cor[x->dest] == 1 && pesos[v] + x->custo < pesos[x->dest] && x->custo < valor) {
+                pais[x->dest] = v;
+                pesos[x->dest] = pesos[v] + x->custo;
+            }
+        }
+    }
+return r;
 }
 
 
 int main() {
-    
+    GrafoL out;
+    create_exemploL(out);
+    int pais[NV], pesos[NV];
+
+    // Teste 1
+    dijkstraSP2(out, 0, pais, pesos, 3);
+    for (int i = 0; i < NV; i++)
+    {
+        printf("%d ", pesos[i]);
+    }
+    printf("\n");
 
     return 0;
 }
