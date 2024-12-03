@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NV 10
+#define NV 7
 
 typedef struct aresta {
     int dest;
@@ -172,17 +172,6 @@ int homomorfOK (GrafoL g, GrafoL h, int f[]) {
     return 1;
 }
 
-int DF (GrafoL g, int or, int v[], int p[], int l[]) {
-    int i;
-    for (i=0; i<NV; i++) {
-        v[i]=0;
-        p[i] = -1;
-        l[i] = -1;
-    }
-    p[or] = -1; l[or] = 0;
-    return DFRec (g,or,v,p,l);
-}
-
 int DFRec (GrafoL g, int or, int v[], int p[], int l[]) {
     int i; LAdj a;
     i=1;
@@ -195,6 +184,17 @@ int DFRec (GrafoL g, int or, int v[], int p[], int l[]) {
     }
     v[or]=1;
     return i;
+}
+
+int DF (GrafoL g, int or, int v[], int p[], int l[]) {
+    int i;
+    for (i=0; i<NV; i++) {
+        v[i]=0;
+        p[i] = -1;
+        l[i] = -1;
+    }
+    p[or] = -1; l[or] = 0;
+    return DFRec (g,or,v,p,l);
 }
 
 int BF (GrafoL g, int or, int v[], int p[], int l[]) {
@@ -242,8 +242,45 @@ int maisLonga (GrafoL g, int or, int p[]) {
     return maxDistance;
 }
 
+int ordTop (GrafoL g, int ord[]) {
+    int v[NV], counter = 0, x = 0, deg[NV] = {0}, degZero[NV];
+
+    for (int i = 0; i < NV; i++) {
+        LAdj temp = g[i];
+        while (temp != NULL) {
+            deg[temp->dest]++; // Incrementa o grau de entrada do vértice temp->dest
+            temp = temp->prox;
+        }
+    }
+    for (int i = 0; i < NV; i++)
+    {
+        if (deg[i] == 0)
+        {
+            ord[counter++] = i;
+        }
+    }
+    for (int i = 0; i < NV; i++)
+    {
+        LAdj temp = g[ord[i]];
+        while (temp != NULL)
+        {
+            deg[temp->dest]--;
+            if (deg[temp->dest] == 0) ord[counter++] = temp->dest;      
+            temp = temp->prox;
+        }
+    }
+
+    return 1;
+}
+
 int ciclo (GrafoL g, int c[]) {
-    int v[NV], p[NV], l[NV];
+    int v[NV], p[NV];
+    for (int i = 0; i < NV; i++)
+    {
+        v[i] = -1;
+        p[i] = -1;
+    }
+    
     for (int i = 0; i < NV; i++)
     {
         c[0] = i;
@@ -254,7 +291,10 @@ int ciclo (GrafoL g, int c[]) {
             if (v[temp->dest] == -1)
             {
                 c[counter] = temp->dest;
-                return c;
+                if (c[0] == c[counter])
+                {
+                    return 1;
+                }
             }
             c[counter] = temp->dest;
             v[temp->dest] = -1;
@@ -266,33 +306,57 @@ int ciclo (GrafoL g, int c[]) {
     return 0;
 }
 
-int ciclo2 (GrafoL g, int c[]) {
-    int v[NV], p[NV], l[NV];
-    for (int i = 0; i < NV; i++)
-    {
-        v[i] = 0;
-        p[i] = -1;
-    }
+void swap (int v[], int i, int j) {
+    int t = v[i]; v[i] = v[j]; v[j] = t;
+}
 
-    for (int i = 0; i < NV; i++)
-    {
-        if (!v[i])
-        {
-            if (cicloRec(g, i, c, v, p))
-            {
-                return 1;
-            }
-            
-        }
-        
+int minIndPeso (int v[], int pesos[], int tam) {
+    int i, r = 0;
+    for (i=1; i<tam; i++)
+    if (pesos[v[i]] < pesos[v[r]]) r = i;
+    return r;
+}
+
+int dijkstraSP (GrafoL g, int or, int pais[], int pesos[]) {
+    int r, i, v, cor [NV], orla[NV], tam;
+    LAdj x;
+    // inicializacoes
+    for (i=0; i<NV; i++) {
+        pais[i] = -2; cor[i] = 0 ; // nao visitado
     }
+    r = 0; orla[0] = or; tam = 1;
+    pesos[or] = 0; pais[or] = -1; cor [or] = 1; // na orla
+    // ciclo
+    while (tam>0) {
+        // seleccionar vertice de menor peso
+        i = minIndPeso (orla, pesos,tam);
+        swap (orla, i, --tam);
+        v = orla[tam];
+        r++; cor[v] = 2; //visitado
+        for (x=g[v]; x!=NULL; x=x->prox){
+            if (cor[x->dest] == 0) {
+                cor[x->dest] = 1; orla[tam++] = x->dest;
+                pais[x->dest] = v;
+                pesos[x->dest] = pesos[v] + x->custo;
+            }
+            else if (cor[x->dest] == 1 && pesos[v] + x->custo < pesos[x->dest]) {
+                pais[x->dest] = v;
+                pesos[x->dest] = pesos[v] + x->custo;
+            }
+        }
+    }
+return r;
+}
+
+int excentricidadeV (GrafoL g, int v) {
+    int pais[NV], pesos[NV];
+    int nodes = dijkstraSP(g, v, pais, pesos);
     
-    
-    return 0;
 }
 
 
 int main() {
+    
 
     return 0;
 }
