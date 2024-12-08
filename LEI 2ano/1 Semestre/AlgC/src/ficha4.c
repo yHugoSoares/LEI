@@ -76,7 +76,7 @@ void fromMat(GrafoM in, GrafoL out) {
         out[i] = NULL;
         for (int j = 0; j < NV; j++) {
             if (in[i][j] != 0) {
-                LAdj newAresta = malloc(sizeof(struct aresta));
+                LAdj newAresta = malloc(sizeof (struct aresta));
                 newAresta->dest = j;
                 newAresta->custo = in[i][j];
                 newAresta->prox = out[i];
@@ -176,8 +176,8 @@ int DFRec (GrafoL g, int or, int v[], int p[], int l[]) {
     int i; LAdj a;
     i=1;
     v[or]=-1;
-    for (a=g[or]; a!=NULL; a=a->prox)
-    if (!v[a->dest]){
+    for (a = g[or]; a != NULL; a = a->prox)
+    if (!v[a->dest]) {
         p[a->dest] = or;
         l[a->dest] = 1+l[or];
         i+=DFRec(g,a->dest,v,p,l);
