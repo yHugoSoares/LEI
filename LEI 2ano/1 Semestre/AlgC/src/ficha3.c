@@ -15,6 +15,10 @@ int h[] = {10, 15, 11, 16, 22, 35, 20, 21, 23, 34, 37, 80, 43, 22, 25, 24, 28};
 // (c) (i - 1) / 2
 // (d) n / 2
 
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
 void bubbleUp(int i, int h[]) {
     int p = (i - 1) / 2;
     while (i > 0 && h[i] > h[p]) {
@@ -78,7 +82,7 @@ int add (int x, PriorityQueue *q) {
     return 1;
 }
 
-int remove (PriorityQueue *q, int *rem) {
+int removeHeaps (PriorityQueue *q, int *rem) {
     if (q->tamanho == 0) return 0;
     *rem = q->valores[0];
     q->valores[0] = q->valores[q->tamanho - 1];
@@ -89,18 +93,80 @@ int remove (PriorityQueue *q, int *rem) {
 
 void heapifyUp (int v[], int N) {
     // with bubbleUp
-    for (int i = 0; i < N; i++) {
+    for (int i = 1; i < N; i++) {
         bubbleUp(i, v);
     }
-}
+} // Complexidade N * log(N)
 
 void heapifyDown (int v[], int N) {
     // with bubbleDown
     for (int i = N - 1; i >= 0; i--) {
         bubbleDown(i, v, N);
     }
+} // Complexidade N
+
+#define NE -1
+
+int alturaAux (int a[], int N, int i) {
+    if (i >= N || a[i] == NE) return 0;
+    int left = 2 * i + 1, right = 2 * i + 2;
+    
+    
+    return 1 + max(alturaAux(a, N, left), alturaAux(a, N, right));
 }
 
+int altura (int a[], int N) {
+    return alturaAux(a, N, 0);
+}
+
+
+#define Size 10
+typedef struct nodo {
+    char *chave;
+    int ocorr;
+    struct nodo *prox;
+} Nodo, *THash [Size];
+
+unsigned hash(char *str){
+    unsigned hash = 5381;
+    int c;
+    while (c = *str++) hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+    return hash;
+}
+
+void initEmpty (THash t) {
+    for (int i = 0; i < Size; i++) {
+        t[i] = NULL;
+    }
+}
+
+void add (char *s, THash t) {
+    int h = hash(s);
+    int pos = h % Size;
+
+    Nodo *n = t[pos];
+    while (n != NULL) {
+        if (strcmp(n->chave, s) == 0) {
+            n->ocorr++;
+            return;   
+        }
+        n = n->prox;
+    }
+}
+
+int lookup (char *s, THash t) {
+    int h = hash(s);
+    int pos = h % Size;
+    if (t[pos]->chave == s) return t[pos]->ocorr;
+    return 0;
+}
+
+int remove (char *s, THash t) {
+    int h = hash(s);
+    int pos = h % Size;
+    if (t[pos]->chave == s) t[pos]->ocorr--;
+    return 1;
+}
 
 int main() {
 

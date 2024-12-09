@@ -11,11 +11,11 @@ typedef WEIGHT GraphM[MAX][MAX];
 #define NE -1
 
 int graphM[MAX][MAX] = {
-    { NE,   4,   3,  10,  NE },
-    {  4,  NE,   2,  NE,  40 },
-    {  3,   2,  NE,  NE,  NE },
-    { 10,  NE,  NE,  NE,   2 }, 
-    { NE,  40,  NE,   2,  NE }};
+    { NE,   4,  NE,  NE,  NE },
+    {  4,  NE,   2,  NE,  NE },
+    { NE,   2,  NE,  NE,  NE },
+    { NE,  NE,  NE,  NE,   2 }, 
+    { NE,  NE,  NE,   2,  NE }};
 
 
 typedef struct edge {
@@ -24,28 +24,6 @@ typedef struct edge {
     struct edge *next;
 } *Edge, *GraphL[MAX];
 
-void create_exemploL(GraphL out){
-    // Para o vértice 0:
-    out[0] = malloc(sizeof(struct edge));
-    out[0]->dest = 1;   // 0 -> 2
-    out[0]->weight = 4;
-
-
-    // Para o vértice 1:
-    out[1] = malloc(sizeof(struct edge));
-    out[1]->dest = 2;   // 1 -> 2
-    out[1]->weight = 1;
-
-    // Para o vértice 2:
-    out[2] = malloc(sizeof(struct edge));
-    out[2]->dest = 3;   // 2 -> 3
-    out[2]->weight = 3;
-
-    // Para o vértice 3:
-    out[3] = malloc(sizeof(struct edge));
-    out[3]->dest = NE;
-    out[3]->weight = NE;
-}
 
 void printGraphL(GraphL graphL) {
     for (int i = 0; i < MAX; i++)
