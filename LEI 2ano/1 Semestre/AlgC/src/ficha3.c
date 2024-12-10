@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 
 int h[] = {10, 15, 11, 16, 22, 35, 20, 21, 23, 34, 37, 80, 43, 22, 25, 24, 28}; 
@@ -140,7 +141,7 @@ void initEmpty (THash t) {
     }
 }
 
-void add (char *s, THash t) {
+void addHash (char *s, THash t) {
     int h = hash(s);
     int pos = h % Size;
 
@@ -154,14 +155,14 @@ void add (char *s, THash t) {
     }
 }
 
-int lookup (char *s, THash t) {
+int lookupHash (char *s, THash t) {
     int h = hash(s);
     int pos = h % Size;
     if (t[pos]->chave == s) return t[pos]->ocorr;
     return 0;
 }
 
-int remove (char *s, THash t) {
+int removeHash (char *s, THash t) {
     int h = hash(s);
     int pos = h % Size;
     if (t[pos]->chave == s) t[pos]->ocorr--;
