@@ -26,9 +26,8 @@ Throughout the program, I have worked with various programming languages and tec
 - C
 - Java
 - Haskell
+- Assembly
 - SQL
-
-## How to Use
 
 ## Contact
 
