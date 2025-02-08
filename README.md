@@ -9,11 +9,15 @@ This repository contains coursework, projects, and assignments from my Bachelor'
 The repository is organized by academic year and course units:
 
 - **1st Year**
-  - Done.
-  - Missing: Lógica
+  - 1st Semester Done.
+  - 2nd Semester missing Lógica.
 
 - **2nd Year**
   - 1st Semester Done.
+  - 2nd Semester Doing.
+
+- **3rd Year**
+  - Not Started.
 
 ## Technologies and Languages
 
