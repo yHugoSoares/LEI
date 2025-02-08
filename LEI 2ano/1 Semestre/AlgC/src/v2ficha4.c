@@ -27,6 +27,15 @@ void printGraph(GrafoL g) {
     }
 }
 
+void printComponentes(int c[]) {
+    printf("Componentes: ");
+    for (int i = 0; i < NV; i++)
+    {
+        printf("%d ", c[i]);
+    }
+    printf("\n");
+}
+
 void fromMat (GrafoM in, GrafoL out) {
     for (int i = 0; i < NV; i++) out[i] = NULL;
     for (int i = 0; i < NV; i++)
@@ -86,16 +95,138 @@ int inDegree (GrafoL g) {
 }
 
 int colorOK (GrafoL g, int cor[]) {
-    
+    for (int i = 0; i < NV; i++)
+    {
+        LAdj x = g[i];
+        while (x != NULL)
+        {
+            if (cor[i] == cor[x->dest]) return 0;
+            x = x->prox;
+        }
+    }
+    return 1;
 }
 
+int homomorfOK (GrafoL g, GrafoL h, int f[]) {
+    for (int i = 0; i < NV; i++)
+    {
+        LAdj gLAdj = g[i];
+        int origem = f[i];
+        while (gLAdj != NULL)
+        {
+            int destino = f[gLAdj->dest];
+            LAdj hLAdj = h[origem];
+
+            int found = 0;
+            while (hLAdj != NULL)
+            {
+                if (hLAdj->dest == destino)
+                {
+                    found = 1;
+                    break;
+                }
+                hLAdj = hLAdj->prox;
+            }
+            if (!found) return 0;
+
+            gLAdj = gLAdj->prox;
+        }
+    }
+    return 1;
+}
+
+int DFRec (GrafoL g, int or, int v[], int p[], int l[]) {
+    int i;
+    LAdj a;
+    i=1;
+    v[or]=-1;
+    for (a=g[or]; a!=NULL; a=a->prox)
+        if (!v[a->dest]){
+            p[a->dest] = or;
+            l[a->dest] = 1+l[or];
+            i+=DFRec(g,a->dest,v,p,l);
+        }
+    v[or]=1;
+    return i;
+}
+
+int DF (GrafoL g, int or, int v[], int p[], int l[]) {
+    int i;
+    for (i=0; i<NV; i++) {
+        v[i]=0;
+        p[i] = -1;
+        l[i] = -1;
+    }
+    p[or] = -1;
+    l[or] = 0;
+    return DFRec (g,or,v,p,l);
+}
+
+int BF (GrafoL g, int or, int v[], int p[], int l[]) {
+    int i, x; LAdj a;
+    int q[NV], front, end;
+    for (i=0; i<NV; i++) {
+        v[i]=0;
+        p[i] = -1;
+        l[i] = -1;
+    }
+    front = end = 0;
+    q[end++] = or; //enqueue
+    v[or] = 1;
+    l[or]=0;
+    p[or]=-1; //redundante
+    i=1;
+    while (front != end) {
+        x = q[front++]; //dequeue
+        for (a=g[x]; a!=NULL; a=a->prox)
+            if (!v[a->dest]) {
+                i++;
+                v[a->dest]=1;
+                p[a->dest]=x;
+                l[a->dest]=1+l[x];
+                q[end++]=a->dest; //enqueue
+            }
+    }
+    return i;
+}
+
+int maisLonga (GrafoL g, int or, int p[]) {
+    int v[NV], l[NV];
+    return DF(g, or, v, p, l);
+}
+
+void dfs(GrafoL g, int o, int c[], int x) // travessia em profundidade; poderia ser em largura
+{
+    LAdj p;
+    c[o] = x;
+    for (p = g[o]; p; p = p->prox) {
+        if (c[p->dest] == -1) dfs(g, p->dest, c, x);
+    }
+}
+
+void componentes(GrafoL g, int c[])
+{
+    int i, x = 0;
+
+    for (i = 0; i < NV; i++) c[i] = -1;
+
+    for (i = 0; i < NV; i++)
+        if (c[i] == -1) {
+            dfs(g, i, c, x);
+            x++;
+        }
+}
 
 int main() {
     GrafoL out, out2;
+    int c[NV] = {0};
 
     fromMat(exemploM, out);
     inverte(out, out2);
+    componentes(out, c);
 
     printGraph(out);
     printf("Maior: %d\n", inDegree(out));
+    printComponentes(c);
+    
 }
