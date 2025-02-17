@@ -1,6 +1,3 @@
-[submodule "LEI 2ano/1 Semestre/LI3/project"]
-	path = LEI 2ano/1 Semestre/LI3/project
-	url = https://github.com/dium-li3/2425-G46.git
 [submodule "LEI 1ano/1 Semestre/LI2425/2024li1g001"]
 	path = LEI 1ano/1 Semestre/LI2425/2024li1g001
 	url = https://gitlab.com/uminho-di/li1/2425/projetos/2024li1g001.git
