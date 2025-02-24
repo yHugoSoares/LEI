@@ -12,25 +12,24 @@ typedef struct person {
     int age;
 } Person;
 
-void add_person(const char *filename, const char *name, int age) {
-    int fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+int add_person(const char *filename, const char *name, int age) {
+    
+    int fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0666);
     if (fd == -1) {
         perror("open");
         exit(1);
     }
 
     Person p;
-    strncpy(p.name, name, sizeof(p.name) - 1);
+    strcpy(p.name, name);
     p.name[sizeof(p.name) - 1] = '\0';
     p.age = age;
 
-    if (write(fd, &p, sizeof(Person)) != sizeof(Person)) {
-        perror("write");
-        close(fd);
-        exit(1);
-    }
+    write(fd, &p, sizeof(Person));
 
     close(fd);
+
+    return 0;
 }
 
 void list_people(const char *filename, int n) {
@@ -51,26 +50,24 @@ void list_people(const char *filename, int n) {
     close(fd);
 }
 
-void update_person(const char *filename, const char *name, int new_age) {
-    int fd = open(filename, O_RDWR);
+void update_person(const char *filename, int offset, int new_age) {
+    int fd = open(filename, O_WRONLY);
     if (fd == -1) {
         perror("open");
         exit(1);
     }
 
     Person p;
-    while (read(fd, &p, sizeof(Person)) == sizeof(Person)) {
-        if (strcmp(p.name, name) == 0) {
-            p.age = new_age;
-            lseek(fd, -sizeof(Person), SEEK_CUR);
-            if (write(fd, &p, sizeof(Person)) != sizeof(Person)) {
-                perror("write");
-                close(fd);
-                exit(1);
-            }
-            break;
-        }
+    
+    lseek(fd, (offset - 1) * sizeof(p), SEEK_SET);
+
+    ssize_t bytes = read(fd, &p, sizeof(Person));
+    if(bytes < 0) {
+        perror("read");
+        exit(1);
     }
+    p.age = new_age;
+    int offset2 = lseek(fd, -sizeof(p), SEEK_CUR);
 
     close(fd);
 }
