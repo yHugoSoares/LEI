@@ -18,4 +18,4 @@ all:
 
 # Clean up class files
 clean:
-	rm -rf $(BIN_DIR)/*.class
+	rm $(BIN_DIR)/*.class
