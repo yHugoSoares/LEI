@@ -48,7 +48,7 @@ public class Ficha1 {
                 int num2 = sc.nextInt();
                 System.out.println("Os números por ordem decrescente são: " + ex.maximoNumeros(num1, num2) + ex.minimoNumeros(num1, num2));
                 System.out.println("A média é: " + ex.media(num1, num2));
-            
+                break;
             case "6":
                 System.out.println("Insira o número:");
                 int num = sc.nextInt();
