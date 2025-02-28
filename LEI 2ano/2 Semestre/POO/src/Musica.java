@@ -96,6 +96,9 @@ public class Musica {
         VezesOuvidas = vezesOuvidas;
     }
 
+
+
+}
 //    UML 
 // ---------------------------------
 // |            Musica             |
@@ -129,7 +132,6 @@ public class Musica {
 // | + setInterprete(interprete:   |
 // |   String)                     |
 // | + setAutor(autor: String)     |
-// | + setLetra(letra: String[])   |
 // | + setMusicaCaracteres(        |
 // |   musicaCaracteres: String[]) |
 // | + setDuracao(duracao: int)    |
@@ -137,5 +139,3 @@ public class Musica {
 // |   int)                        |
 // | + uml()                       |
 // ---------------------------------
-
-}
