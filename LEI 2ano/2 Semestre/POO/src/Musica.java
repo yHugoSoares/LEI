@@ -96,14 +96,46 @@ public class Musica {
         VezesOuvidas = vezesOuvidas;
     }
 
-    public void uml() {
-        System.out.println("Nome: " + Nome);
-        System.out.println("Interprete: " + Interprete);
-        System.out.println("Autor: " + Autor);
-        System.out.println("Letra: " + Letra);
-        System.out.println("MusicaCaracteres: " + MusicaCaracteres);
-        System.out.println("Duracao: " + Duracao);
-        System.out.println("VezesOuvidas: " + VezesOuvidas);
-    }
+//    UML 
+// ---------------------------------
+// |            Musica             |
+// ---------------------------------
+// | - Nome: String                |
+// | - Interprete: String          |
+// | - Autor: String               |
+// | - Letra: String[]             |
+// | - MusicaCaracteres: String[]  |
+// | - Duracao: int                |
+// | - VezesOuvidas: int           |
+// ---------------------------------
+// | + Musica()                    |
+// | + Musica(nome: String,        |
+// |   interprete: String,         |
+// |   autor: String,              |
+// |   letra: String[],            |
+// |   musicaCaracteres: String[], |
+// |   duracao: int,               |
+// |   vezesOuvidas: int)          |
+// | + Musica(m: Musica)           |
+// | + getNome(): String           |
+// | + getInterprete(): String     |
+// | + getAutor(): String          |
+// | + getLetra(): String[]        |
+// | + getMusicaCaracteres():      |
+// |   String[]                    |
+// | + getDuracao(): int           |
+// | + getVezesOuvidas(): int      |
+// | + setNome(nome: String)       |
+// | + setInterprete(interprete:   |
+// |   String)                     |
+// | + setAutor(autor: String)     |
+// | + setLetra(letra: String[])   |
+// | + setMusicaCaracteres(        |
+// |   musicaCaracteres: String[]) |
+// | + setDuracao(duracao: int)    |
+// | + setVezesOuvidas(vezesOuvidas:|
+// |   int)                        |
+// | + uml()                       |
+// ---------------------------------
 
 }
