@@ -96,8 +96,45 @@ public class Musica {
         VezesOuvidas = vezesOuvidas;
     }
 
+    public int qtsLinhasPoema () {
+        return Letra.length;
+    }
 
+    public int numeroCarateres () {
+        int totalCharacters = 0;
+        for (String linha : Letra) {
+            totalCharacters += linha.length();
+        }
+        return totalCharacters;
+    }
 
+    public void addLetra(int posicao, String novaLinha) {
+        String[] novaLetra = new String[Letra.length + 1];
+        for (int i = 0, j = 0; i < novaLetra.length; i++) {
+            if (i == posicao) {
+                novaLetra[i] = novaLinha;
+            } else {
+                novaLetra[i] = Letra[j++];
+            }
+        }
+        Letra = novaLetra;
+    }
+
+    public String linhaMaisLonga() {
+        int max = 0;
+        String result = "";
+        for (String linha : Letra) {
+            if (linha.length() > max) {
+                max = linha.length();
+                result = linha;
+            }
+        }
+        return result;
+    }
+
+    public String[] letrasMaisUsadas() {
+        
+    }
 }
 //    UML 
 // ---------------------------------

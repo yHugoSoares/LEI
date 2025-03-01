@@ -39,7 +39,11 @@ public class Ficha3 {
                 System.out.println("Escolha a alinea: ");
                 String opcaoA = sc.nextLine();
                 switch (opcaoA) {
-                    case "a" -> System.out.println("Nome: " + m.getNome());
+                    case "a" -> System.out.println("Linhas: " + m.qtsLinhasPoema());
+                    case "b" -> System.out.println("Caracteres: " + m.numeroCarateres());
+                    
+                    case "d" -> System.out.println("Linha mais longa: " + m.linhaMaisLonga());
+
                 }
             }
             default -> {
