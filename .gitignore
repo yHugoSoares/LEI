@@ -2,6 +2,17 @@
 # Prerequisites
 *.d
 
+# Haskell/Cabal build artifacts
+dist-newstyle/
+dist/
+.stack-work/
+*.dyn_hi
+*.dyn_o
+*.hi
+*.o
+*.cache
+*.lock
+
 # Directories
 
 
