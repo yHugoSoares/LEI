@@ -132,8 +132,8 @@ public class Musica {
         return result;
     }
 
-    public String[] letrasMaisUsadas() {
-        
+    public String letrasMaisUtilizadas () {
+        return "";
     }
 }
 //    UML 

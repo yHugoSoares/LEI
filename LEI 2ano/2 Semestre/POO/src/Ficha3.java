@@ -41,7 +41,7 @@ public class Ficha3 {
                 switch (opcaoA) {
                     case "a" -> System.out.println("Linhas: " + m.qtsLinhasPoema());
                     case "b" -> System.out.println("Caracteres: " + m.numeroCarateres());
-                    
+                    case "c" -> m.addLetra(0, "Hello");
                     case "d" -> System.out.println("Linha mais longa: " + m.linhaMaisLonga());
 
                 }
