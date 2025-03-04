@@ -1,3 +1,5 @@
+default: %
+
 %: src/%.c
 	gcc -o bin/$@ $<
 
