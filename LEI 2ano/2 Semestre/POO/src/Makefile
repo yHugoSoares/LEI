@@ -30,10 +30,13 @@ CLASSES = \
 	Circulo.java \
 	Sensor.java \
 	Musica.java \
+	LinhaEncomenda.java \
+	Encomenda.java \
 	Ficha1.java \
 	Ficha2.java \
 	Ficha3.java \
 	HelloWrld.java
+	
 
 default: classes
 

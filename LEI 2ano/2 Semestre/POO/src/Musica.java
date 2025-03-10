@@ -132,8 +132,31 @@ public class Musica {
         return result;
     }
 
-    public String letrasMaisUtilizadas () {
-        return "";
+    public String[] letrasMaisUtilizadas() {
+        int[] letras = new int[26]; 
+        for (String linha : Letra) {
+            for (char c : linha.toCharArray()) {
+                if (c >= 'a' && c <= 'z') {
+                    letras[c - 'a']++;
+                } else if (c >= 'A' && c <= 'Z') {
+                    letras[c - 'A']++;
+                }
+            }
+        }
+    
+        String[] maisUsadas = new String[3];
+        for (int i = 0; i < 3; i++) {
+            int maxIndex = 0;
+            for (int j = 1; j < letras.length; j++) {
+                if (letras[j] > letras[maxIndex]) {
+                    maxIndex = j;
+                }
+            }
+            maisUsadas[i] = Character.toString((char) (maxIndex + 'a'));
+            letras[maxIndex] = -1; // Marca como já usada
+        }
+    
+        return maisUsadas;
     }
 }
 //    UML 
