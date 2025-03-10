@@ -44,30 +44,37 @@ void list_people(const char *filename, int n) {
         if (read(fd, &p, sizeof(Person)) != sizeof(Person)) {
             break;
         }
-        printf("Name: %s, Age: %d\n", p.name, p.age);
+        printf("Name: %s | Age: %d\n", p.name, p.age);
     }
 
     close(fd);
 }
 
-void update_person(const char *filename, int offset, int new_age) {
-    int fd = open(filename, O_WRONLY);
+void update_person(const char *filename, const char *name, int new_age) {
+    int fd = open(filename, O_RDWR);
     if (fd == -1) {
         perror("open");
         exit(1);
     }
 
     Person p;
-    
-    lseek(fd, (offset - 1) * sizeof(p), SEEK_SET);
-
-    ssize_t bytes = read(fd, &p, sizeof(Person));
-    if(bytes < 0) {
-        perror("read");
-        exit(1);
+    ssize_t bytes;
+    while ((bytes = read(fd, &p, sizeof(Person))) == sizeof(Person)) {
+        if (strcmp(p.name, name) == 0) {
+            p.age = new_age;
+            lseek(fd, -sizeof(Person), SEEK_CUR);
+            if (write(fd, &p, sizeof(Person)) != sizeof(Person)) {
+                perror("write");
+                close(fd);
+                exit(1);
+            }
+            break;
+        }
     }
-    p.age = new_age;
-    int offset2 = lseek(fd, -sizeof(p), SEEK_CUR);
+
+    if (bytes == -1) {
+        perror("read");
+    }
 
     close(fd);
 }
