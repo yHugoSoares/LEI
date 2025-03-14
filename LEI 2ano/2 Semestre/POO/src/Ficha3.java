@@ -50,7 +50,7 @@ public class Ficha3 {
 
             case "10" -> {
                 LinhaEncomenda l = new LinhaEncomenda("1", "2", 3, 4, 5, 6);
-                Encomenda e = new Encomenda("1", 231029, "Rua Jose Bastes n12", 1, null, new LinhaEncomenda[0]);
+                Encomenda e = new Encomenda("1", 231029, "Rua Jose Gomes n12", 1, null, new LinhaEncomenda[0]);
                 System.out.println("Escolha a alinea: ");
                 String opcaoA = sc.nextLine();
                 switch (opcaoA) {
