@@ -1,3 +1,6 @@
 [submodule "LEI 2ano/2 Semestre/SO/SO2425"]
 	path = LEI 2ano/2 Semestre/SO/SO2425
 	url = https://github.com/yHugoSoares/SO2425.git
+[submodule "LEI 2ano/2 Semestre/POO/POO2425"]
+	path = LEI 2ano/2 Semestre/POO/POO2425
+	url = https://github.com/yHugoSoares/POO2425.git
