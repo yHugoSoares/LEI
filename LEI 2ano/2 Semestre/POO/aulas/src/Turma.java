@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Turma implements Serializable {
+    private String numero;
+    private String nomeTurma;
     private List<Aluno> alunos;
 
     // Constructor
@@ -45,6 +47,12 @@ public class Turma implements Serializable {
             }
         }
         return null;
+    }
+
+    public void Turma( String numero, String nomeTurma, List<Aluno> alunos) {
+        this.numero = numero;
+        this.nomeTurma = nomeTurma;
+        this.alunos = new ArrayList<>(alunos);
     }
 
     // Get the number of students in the Turma

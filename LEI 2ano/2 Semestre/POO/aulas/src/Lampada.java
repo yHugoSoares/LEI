@@ -27,7 +27,7 @@
  
 public class Lampada
 {
-    private ModoLampada modo;
+    private abstract ModoLampada modo;
 
     /* consumo por segundo em Modo.ON */
     private double cpSOn;  
