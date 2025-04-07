@@ -59,10 +59,24 @@ public abstract class Aluno implements Serializable {
         this.nota = aluno.getNota();
     }
 
-    public abstract Aluno clone();
+    public Aluno clone() {
+        return new Aluno(this);
+    }
 
-    public abstract boolean equals(Object obj);
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Aluno aluno = (Aluno) obj;
+        return this.numero.equals(aluno.getNumero());
+    }
 
-    public abstract String toString();
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Número: ").append(this.numero).append("\n");
+        sb.append("Nome: ").append(this.nome).append("\n");
+        sb.append("Curso: ").append(this.curso).append("\n");
+        sb.append("Nota: ").append(this.nota).append("\n");
+        return sb.toString();
+    }
 
 }
