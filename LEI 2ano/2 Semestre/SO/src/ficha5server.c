@@ -16,11 +16,11 @@ int main(int argc, char const *argv[]) {
 
     char buf[BUFFERSIZE];
     
-    // DOESNT TERMINATE    
-    
+    // DOESNT TERMINATE
     ssize_t bytesRead;
     while ((bytesRead = read(fd, buf, BUFFERSIZE)) > 0) {
         write(1, buf, bytesRead);
+        printf(".");
     }
     close(fd);
 

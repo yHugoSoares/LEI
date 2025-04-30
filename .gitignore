@@ -68,3 +68,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Gradle not ready yet
+LEI 2ano/2 Semestre/POO/project_gradle
