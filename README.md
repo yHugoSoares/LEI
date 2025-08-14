@@ -10,11 +10,11 @@ The repository is organized by academic year and course units:
 
 - **1st Year**
   - 1st Semester Done.
-  - 2nd Semester missing Lógica.
+  - 2nd Semester missing 1 course.
 
 - **2nd Year**
   - 1st Semester missing 2 courses.
-  - 2nd Semester missing 2 courses.
+  - 2nd Semester missing 1 course.
 
 - **3rd Year**
   - 1st Semester Doing.
