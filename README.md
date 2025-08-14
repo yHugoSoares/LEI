@@ -18,6 +18,7 @@ The repository is organized by academic year and course units:
 
 - **3rd Year**
   - 1st Semester Doing.
+  - 2nd Semester Not Started.
 
 ## Technologies and Languages
 
