@@ -1,0 +1,290 @@
+package uminho.dss.turmas3l.data;
+
+import uminho.dss.turmas3l.business.Sala;
+import uminho.dss.turmas3l.business.Turma;
+
+import java.sql.*;
+import java.util.*;
+
+import static java.util.stream.Collectors.toList;
+
+public class AlunoDAO implements Map<String, Aluno> {
+
+    
+
+
+
+    @Override
+    public boolean isEmpty() {
+        return this.size() == 0;
+    }
+
+    /**
+     * Método que cerifica se um id de turma existe na base de dados
+     *
+     * @param key id da turma
+     * @return true se a turma existe
+     * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
+     */
+    @Override
+    public boolean containsKey(Object key) {
+        boolean r;
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             PreparedStatement pstm = conn.prepareStatement("SELECT Id FROM turmas WHERE Id=?")) {
+            pstm.setString(1, key.toString());
+            try (ResultSet rs = pstm.executeQuery()) {
+                r = rs.next();  // A chave existe na tabela
+            }
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return r;
+    }
+
+    /**
+     * Verifica se uma turma existe na base de dados
+     *
+     * Esta implementação é provisória. Devia testar o objecto e não apenas a chave.
+     *
+     * @param value ...
+     * @return ...
+     * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
+     */
+    @Override
+    public boolean containsValue(Object value) {
+        Turma t = (Turma) value;
+        return this.containsKey(t.getId());
+    }
+
+    /**
+     * Obter uma turma, dado o seu id
+     *
+     * @param key id da turma
+     * @return a turma caso exista (null noutro caso)
+     * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
+     */
+    @Override
+    public Turma get(Object key) {
+        Turma t = null;
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             PreparedStatement pstm = conn.prepareStatement("SELECT * FROM turmas WHERE Id=?")) {
+            pstm.setString(1, key.toString());
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {  // A chave existe na tabela
+                    String id = rs.getString("Id");  // Podíamos usar a key, mas assim temos a certeza que é o id da BD
+                    // Reconstruir a colecção de alunos da turma
+                    Collection<String> alunos = getAlunosTurma(key.toString(), pstm);
+
+                    // Reconstruir a Sala
+                    Sala s = null;
+                    String sql = "SELECT * FROM salas WHERE Num='"+rs.getString("Sala")+"'";
+                    try (ResultSet rsa = pstm.executeQuery(sql)) {  // Nota: abrir um novo ResultSet no mesmo Statement fecha o ResultSet anterior
+                        if (rsa.next()) {  // Encontrou a sala
+                            s = new Sala(rs.getString("Sala"),
+                                    rsa.getString("Edificio"),
+                                    rsa.getInt("Capacidade"));
+                        } else {
+                            // BD inconsistente!! Sala não existe - tratar com excepções.
+                        } // catch é feito no try inicial - este try serve para fechar o ResultSet automaticamente
+
+                    }
+
+                    // Reconstruir a turma cokm os dados obtidos da BD
+                    t = new Turma(id, s, alunos);
+                }
+            }
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return t;
+    }
+
+    /**
+     * Método auxiliar que obtem a lista de alunos da turma
+     *
+     * @param tid o id da turma
+     * @return a lista de alunos da turma
+     */
+    private Collection<String> getAlunosTurma(String tid, Statement stm) throws SQLException {
+        Collection<String> alunos = new TreeSet<>();
+        try (ResultSet rsa = stm.executeQuery("SELECT Num FROM alunos WHERE Turma='"+tid+"'")) {
+            while(rsa.next()) {
+                alunos.add(rsa.getString("Num"));
+            }
+        } // execepção é enviada a quem chama o método - este try serve para fechar o ResultSet automaticamente
+        return alunos;
+    }
+
+    /**
+     * Insere uma turma na base de dados
+     *
+     * ATENÇÂO: Esta implementação é provisória.
+     * Falta devolver o valor existente (caso exista um)
+     * Falta remover a sala anterior, caso esteja a ser alterada
+     * Deveria utilizar transacções...
+     *
+     * @param key o id da turma
+     * @param t a turma
+     * @return para já retorna sempre null (deverá devolver o valor existente, caso exista um)
+     * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
+     */
+    @Override
+    public Turma put(String key, Turma t) {
+        Turma res = null;
+        Sala s = t.getSala();
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             Statement stm = conn.createStatement()) {
+
+            // Actualizar a Sala
+            stm.executeUpdate(
+                    "INSERT INTO salas " +
+                            "VALUES ('"+ s.getNumero()+ "', '"+
+                            s.getEdificio()+"', "+
+                            s.getCapacidade()+") " +
+                            "ON DUPLICATE KEY UPDATE Edificio=Values(Edificio), " +
+                            "Capacidade=Values(Capacidade)");
+
+            // Actualizar a turma
+            stm.executeUpdate(
+                    "INSERT INTO turmas VALUES ('"+t.getId()+"', '"+s.getNumero()+"') " +
+                            "ON DUPLICATE KEY UPDATE Sala=VALUES(Sala)");
+
+            // Actualizar os alunos da turma
+            Collection<String> oldAl = getAlunosTurma(key, stm);
+            Collection<String> newAl = t.getAlunos().stream().collect(toList());
+            newAl.removeAll(oldAl);         // Alunos que entram na turma, em relação ao que está na BD
+            oldAl.removeAll(t.getAlunos().stream().collect(toList())); // Alunos que saem na turma, em relação ao que está na BD
+            try (PreparedStatement pstm = conn.prepareStatement("UPDATE alunos SET Turma=? WHERE Num=?")) {
+                // Remover os que saem da turma (colocar a NULL a coluna que diz qual a turma dos alunos)
+                pstm.setNull(1, Types.VARCHAR);
+                for (String a: oldAl) {
+                    pstm.setString(2, a);
+                    pstm.executeUpdate();
+                }
+                // Adicionar os que entram na turma (colocar o Id da turma na coluna Turma da tabela alunos)
+                // ATENÇÃO: Para já isto não vai funcionar pois os alunos não estão na tabela
+                //          (não há lá nada para atualizar).  Funcionará quando tivermos um AlunoDAO
+                //          a guardar os alunos na tabela 'alunos'.
+                pstm.setString(1, t.getId());
+                for (String a: newAl) {
+                    pstm.setString(2, a);
+                    pstm.executeUpdate();
+                }
+            }
+
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return res;
+    }
+
+    /**
+     * Remover uma turma, dado o seu id
+     *
+     * NOTA: Não estamos a apagar a sala...
+     *
+     * @param key id da turma a remover
+     * @return a turma removida
+     * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
+     */
+    @Override
+    public Turma remove(Object key) {
+        Turma t = this.get(key);
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             PreparedStatement turmas_pstm = conn.prepareStatement("DELETE FROM turmas WHERE Id=?");
+             PreparedStatement alunos_pstm = conn.prepareStatement("UPDATE alunos SET Turma=? WHERE Num=?")) {
+            // retirar os alunos da turma
+            alunos_pstm.setNull(1, Types.VARCHAR);
+            for (String na: t.getAlunos()) {
+                alunos_pstm.setString(2, na);
+                alunos_pstm.executeUpdate();
+            }
+            // apagar a turma
+            turmas_pstm.setString(1, key.toString());
+            turmas_pstm.executeUpdate();
+        } catch (Exception e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return t;
+    }
+
+    /**
+     * Adicionar um conjunto de turmas à base de dados
+     *
+     * @param turmas as turmas a adicionar
+     * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
+     */
+    @Override
+    public void putAll(Map<? extends String, ? extends Turma> turmas) {
+        for(Turma t : turmas.values()) {
+            this.put(t.getId(), t);
+        }
+    }
+
+    /**
+     * Apagar todas as turmas
+     *
+     * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
+     */
+    @Override
+    public void clear() {
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             Statement stm = conn.createStatement()) {
+            stm.executeUpdate("UPDATE alunos SET Turma=NULL");
+            stm.executeUpdate("TRUNCATE turmas");
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    /**
+     * NÃO IMPLEMENTADO!
+     * @return ainda nada!
+     */
+    @Override
+    public Set<String> keySet() {
+        throw new NullPointerException("Not implemented!");
+    }
+
+    /**
+     * @return Todos as turmas da base de dados
+     */
+    @Override
+    public Collection<Turma> values() {
+        Collection<Turma> res = new HashSet<>();
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             Statement stm = conn.createStatement();
+             ResultSet rs = stm.executeQuery("SELECT Id FROM turmas")) { // ResultSet com os ids de todas as turmas
+            while (rs.next()) {
+                String idt = rs.getString("Id"); // Obtemos um id de turma do ResultSet
+                Turma t = this.get(idt);                    // Utilizamos o get para construir as turmas uma a uma
+                res.add(t);                                 // Adiciona a turma ao resultado.
+            }
+        } catch (Exception e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return res;
+    }
+
+    /**
+     * NÃO IMPLEMENTADO!
+     * @return ainda nada!
+     */
+    @Override
+    public Set<Map.Entry<String, Turma>> entrySet() {
+        throw new NullPointerException("public Set<Map.Entry<String,Aluno>> entrySet() not implemented!");
+    }
+
+}
