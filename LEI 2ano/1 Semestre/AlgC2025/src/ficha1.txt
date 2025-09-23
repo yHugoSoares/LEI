@@ -1,0 +1,93 @@
+1 PARTE
+
+1)
+
+a)
+int fa (int x, int y){
+    // pre: True
+    ...
+    // pos: (m == x || m == y) && (m >= x && m >= y)
+    return m;
+}
+
+retorna o menor numero entre x, y
+
+b)
+int fb (int x, int y){
+    // pre: x >= 0 && y >= 0
+    ...
+    // pos: x % r == 0 && y % r == 0
+    return r;
+}
+
+divisor comum entre x, y
+
+c)
+int fc (int x, int y){
+    // pre: x > 0 && y > 0
+    ...
+    // pos: r % x == 0 && r % y == 0
+    return r;
+}
+
+multiplo comum entre x, y
+
+d)
+int fd (int a[], int N){
+    // pre: N>0
+    ...
+    // pos: 0 <= p< N && forall_{0 <= i< N} a[p] <= a[i]
+    return p;
+}
+
+p é o indice em qual a[p] é o menor numero do array a
+
+e)
+int fe (int a[], int N){
+    // pre: N>0
+    1
+    ...
+    // pos: forall_{0 <= i< N} x <= a[i]
+    return x;
+}
+
+x é um numero mais pequeno que qualquer outro numero do array a
+
+f)
+int ff (int a[], int N){
+    // pre: N>0
+    ...
+    // pos: (forall_{0 <= i< N} x <= a[i]) &&
+    // (exists_{0 <= i <N} x == a[i])
+    return x;
+}
+
+x é o menor numero do array a
+
+g)
+int fg (int x, int a[], int N){
+    // pre: N>=0
+    ...
+    // pos: (p == -1 && forall_{0 <= i < N} a[i] != x) ||
+    // ( (0 <= p < N ) && x == a[p])
+    return p;
+}
+
+p = -1 se o numero x não pertencer ao array, se pertencer p é igual ao indice onde a[p] == x
+
+
+2) ficha1.c
+
+
+2 PARTE
+
+1)
+
+a) y ser um valor negativo
+
+b)
+
+
+
+
+
