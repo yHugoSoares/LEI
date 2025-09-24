@@ -85,7 +85,7 @@ p = -1 se o numero x não pertencer ao array, se pertencer p é igual ao indice 
 
 a) y ser um valor negativo
 
-b)
+b) 
 
 
 
