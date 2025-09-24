@@ -57,6 +57,7 @@ int isSorted (int v[], int N) {
     {
         if (v[i] > v[i+1]) return 0;
     }
+    // pos: for_all i (0 <= i < N-1 => v[i] <= v[i+1]) => r == 1 && exists i (0 <= i < N-1 && v[i] > v[i+1]) => r == 0
     return 1;
 }
 
