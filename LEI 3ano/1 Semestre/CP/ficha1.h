@@ -14,3 +14,4 @@ mytake :: int -> [a] -> [a]
 mytake 0 _ = []
 mytake _ [] = []
 mytake n (x:xs) = x : mytake (n-1) xs
+
