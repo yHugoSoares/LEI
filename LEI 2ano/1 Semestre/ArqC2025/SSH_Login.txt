@@ -1,0 +1,4 @@
+No âmbito da UC Arquitetura de Computadores, informa-se que poderá aceder ao cluster SeARCH por SSH para o endereço "s7edu.di.uminho.pt", com as seguintes credenciais:
+
+   Login = a107293
+   Password = iwFz1Ph1

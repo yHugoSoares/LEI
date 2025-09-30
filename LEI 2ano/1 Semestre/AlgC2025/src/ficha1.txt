@@ -82,12 +82,26 @@ p = -1 se o numero x não pertencer ao array, se pertencer p é igual ao indice 
 2 PARTE
 
 1)
+a) y < 0
 
-a) y ser um valor negativo
+b) x != y
 
-b) 
+c) x == y
 
+d) x == y
 
+e) y <= 0 && x <= 0
+
+2)
+a) y >= 0
+
+b) x == y
+
+c) x != y
+
+d) x != y
+
+e) y > 0 && x > 0
 
 
 
