@@ -1,6 +1,7 @@
 package src;
 
 import java.util.concurrent.locks.*;
+import java.util.*;
 
 
 
@@ -46,6 +47,40 @@ public class Bank {
         slots=n;
         av=new Account[slots];
         for (int i=0; i<slots; i++) av[i]=new Account(0);
+    }
+
+    private Lock l = new ReentrantLock();
+    private int nextId = 0;
+    private Map<Integer,Account> map = new HashMap<Integer, Account>();
+
+    // Create account with initial balance; returns account id or -1 if no slot available
+    public int createAccount(int balance) {
+        l.lock();
+        try {
+            Account c = new Account(balance);
+            int id = nextId;
+            nextId++;
+            map.put(id, c);
+            return id;
+        } finally {
+            l.unlock();
+        }
+    }
+    
+
+    // Close account; fails if no such account or balance nonzero
+    public int closeAccount(int id) {
+        l.lock();
+        try {
+            Account c = map.get(id);
+            if (c == null || c.balance() != 0)
+                return 0;
+            int bal = c.balance();
+            map.remove(id);
+            return bal;
+        } finally {
+            l.unlock();
+        }
     }
 
     // Account balance
