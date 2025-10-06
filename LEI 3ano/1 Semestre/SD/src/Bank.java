@@ -100,14 +100,14 @@ public class Bank {
             av[from].lock();
         }
         try {
-            if (av[from].withdraw(value)) {
-                av[to].deposit(value);
-                return true;
-            } else {
-                return false;
+            try {
+                if (!av[from].withdraw(value)) 
+                    return false;
+                return av[to].deposit(value);
+            } finally {
+                av[from].unlock();
             }
         } finally {
-            av[from].unlock();
             av[to].unlock();
         }
     }
