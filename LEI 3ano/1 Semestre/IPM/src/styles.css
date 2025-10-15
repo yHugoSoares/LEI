@@ -1,0 +1,31 @@
+.dark-element {
+    background-color: #333;
+    color: #fff;
+}
+.light-element {
+    background-color: #fff;
+    color: #000;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    padding: 20px;
+}
+.button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.button:hover {
+    background-color: #0056b3;
+}
+.header {       
+    font-size: 24px;
+    margin-bottom: 20px;
+}
