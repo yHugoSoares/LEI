@@ -209,45 +209,60 @@ class Graph:
     ##########################################
 
     def procura_aStar(self, start, goal):
-    
-        open_set = set([start])
+        open_set = {start}
         closed_set = set()
-        g_scores = {node: float('inf') for node in self.m_graph}
-        g_scores[start] = 0
-        f_scores = {node: float('inf') for node in self.m_graph}
-        f_scores[start] = self.getH(start)
+        g_scores = {start: 0}
+        # f_scores stores the total estimated cost from start to goal through a given node.
+        # f_score = g_score + h_score (heuristic)
+        f_scores = {start: self.getH(start)}
         parents = {start: None}
 
         while open_set:
-            current = min(open_set, key=lambda n: f_scores[n])
-
-            if current == goal:
+            current_node = None
+            for node in open_set:
+                if current_node is None or f_scores.get(node, float('inf')) < f_scores.get(current_node, float('inf')):
+                    current_node = node
+                    
+            if current_node == goal:
                 path = []
-                while current is not None:
-                    path.append(current)
-                    current = parents[current]
+                while current_node is not None:
+                    path.append(current_node)
+                    current_node = parents[current_node]
                 path.reverse()
                 return path
 
-            open_set.remove(current)
-            closed_set.add(current)
+            # If there are no more nodes to check and we haven't reached the goal, no path exists.
+            if current_node is None:
+                print("Path does not exist!")
+                return None
 
-            for neighbor, weight in self.getNeighbours(current):
+
+            open_set.remove(current_node)
+            closed_set.add(current_node)
+
+
+            for neighbor, weight in self.getNeighbours(current_node):
+                # If the neighbor has already been evaluated, skip it.
                 if neighbor in closed_set:
                     continue
-                tentative_g_score = g_scores[current] + weight
+                
+                tentative_g_score = g_scores.get(current_node, float('inf')) + weight
 
-                if neighbor not in open_set:
-                    open_set.add(neighbor)
-                elif tentative_g_score >= g_scores[neighbor]:
-                    continue
+                # If this path to the neighbor is better than any previously recorded path...
+                if tentative_g_score < g_scores.get(neighbor, float('inf')):
+                    # ...update the parent, g_score, and f_score for the neighbor.
+                    parents[neighbor] = current_node
+                    g_scores[neighbor] = tentative_g_score
+                    f_scores[neighbor] = tentative_g_score + self.getH(neighbor)
+                    
+                    # If the neighbor is not in the open set, add it so it can be evaluated.
+                    if neighbor not in open_set:
+                        open_set.add(neighbor)
 
-                parents[neighbor] = current
-                g_scores[neighbor] = tentative_g_score
-                f_scores[neighbor] = g_scores[neighbor] + self.getH(neighbor)
+        # If the open set is empty and we haven't found the goal, no path exists.
+        print("Path does not exist!")
+        return None
 
-        return None  # No path found
-        
 
 
     ###################################3
@@ -296,3 +311,23 @@ class Graph:
         # No path found
         return None
 
+
+
+    def update_cost(self, node1, node2, new_cost):
+        if node1 in self.m_graph:
+            for index, (adjacent, cost) in enumerate(self.m_graph[node1]):
+                if adjacent == node2:
+                    self.m_graph[node1][index] = (node2, new_cost)
+                    break
+
+        if not self.m_directed and node2 in self.m_graph:
+            for index, (adjacent, cost) in enumerate(self.m_graph[node2]):
+                if adjacent == node1:
+                    self.m_graph[node2][index] = (node1, new_cost)
+                    break
+
+    def update_heuristic(self, node, new_heuristic):
+        if node in self.m_h:
+            self.m_h[node] = new_heuristic
+        else:
+            print(f"Heuristic for node {node} not found.")
