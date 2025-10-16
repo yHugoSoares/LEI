@@ -208,7 +208,7 @@ class Graph:
     #    A* - To Do
     ##########################################
 
-    def a_star(self, start, goal):
+    def procura_aStar(self, start, goal):
     
         open_set = set([start])
         closed_set = set()
