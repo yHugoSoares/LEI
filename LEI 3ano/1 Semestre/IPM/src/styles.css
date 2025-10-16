@@ -1,31 +1,70 @@
-.dark-element {
-    background-color: #333;
-    color: #fff;
+:root{
+    --background-color: #f5f7fa;
+    --area-bg: #00254e30;
+    --accent: #68acff;
+    --light-color: #eef3fb; /* adicionado: cor clara usada no footer */
+    --dark-color: #001f3f;
 }
-.light-element {
-    background-color: #fff;
-    color: #000;
+
+/* Layout root */
+html,body{
+  height:100%;
+  margin:0;
 }
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
+#app{
+  display:grid;
+  box-sizing:border-box;
+  background:var(--background-color);
+  gap:20px; /* spacing between rows and columns */
+  /* rows: 50px, auto, auto, flexible, 100px */
+  grid-template-rows: 50px auto auto 1fr 100px;
+  /* cols: 1fr, 3fr, 2fr, 1fr */
+  grid-template-columns: 1fr 3fr 2fr 1fr;
+  /* 5 rows x 4 cols: name areas accordingly */
+  grid-template-areas:
+    "nav nav nav nav"
+    ". main categories ."
+    ". main categories ."
+    ". main top6 ."
+    "footer footer footer footer";
+  padding:20px;
+}
+
+/* Assign areas */
+nav{ grid-area: nav; background:var(--area-bg); padding:10px; align-items:center; display:flex;}
+main{ grid-area: main; background:white; padding:16px; overflow:auto; }
+.categories{ grid-area: categories; background:var(--area-bg); padding:16px; overflow:auto; }
+
+.category-list {
     padding: 0;
+    list-style-type: none;
 }
-.container {
-    padding: 20px;
-}
-.button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 20px;
+
+.category-list li {
+    padding: 0.5rem 0;
     cursor: pointer;
-    border-radius: 5px;
 }
-.button:hover {
-    background-color: #0056b3;
+
+.top6{ grid-area: top6; background:var(--area-bg); padding:16px; overflow:auto; }
+footer{
+  grid-area: footer;
+  background: var(--light-color); /* usa a variável light-color */
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  align-items: center;     /* centra verticalmente */
+  padding: 0; /* remove padding para alinhamento exato; ajuste se necessário */
 }
-.header {       
-    font-size: 24px;
-    margin-bottom: 20px;
+
+/* Basic responsive tweak: collapse to single column under 700px */
+@media (max-width:700px){
+  #app{
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px auto auto 1fr 100px;
+    grid-template-areas:
+      "nav"
+      "categories"
+      "main"
+      "top6"
+      "footer";
+  }
 }
