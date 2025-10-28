@@ -8,3 +8,6 @@
 	path = LEI 2ano/2 Semestre/POO/GrupoTP-74
 	url = https://github.com/POO-UM/GrupoTP-74.git
 
+[submodule "LEI 3ano/1 Semestre/CC/space-mission"]
+	path = LEI 3ano/1 Semestre/CC/space-mission
+	url = git@github.com:marcosevegrand/space-mission.git
