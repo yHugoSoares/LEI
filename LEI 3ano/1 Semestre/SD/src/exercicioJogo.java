@@ -26,6 +26,7 @@ class JogoImpl implements Jogo {
             
             while (partida == p)
                 cond.await();
+                
         } finally {
             l.unlock();
         }
