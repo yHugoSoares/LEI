@@ -9,22 +9,31 @@
 <body>
   <div id="app">
     <h1>Jogo do Galo</h1>
+
     <div id="controls">
-      <h3 id="status">Turno: X</h3>
+      <h3 id="status">{{ statusText }}</h3>
     </div>
-      <div id="board" class="board" aria-label="Grelha do Jogo do Galo">
-        <div class="cell" data-index="0"></div>
-        <div class="cell" data-index="1"></div>
-        <div class="cell" data-index="2"></div>
-        <div class="cell" data-index="3"></div>
-        <div class="cell" data-index="4"></div>
-        <div class="cell" data-index="5"></div>
-        <div class="cell" data-index="6"></div>
-        <div class="cell" data-index="7"></div>
-        <div class="cell" data-index="8"></div>
+
+    <div id="board" class="board" aria-label="Grelha do Jogo do Galo">
+      <div
+        v-for="(cell, idx) in board"
+        :key="idx"
+        class="cell"
+        :class="cell ? (cell === 'X' ? 'x' : 'o') : ''"
+        @click="handleCellClick(idx)"
+        role="button"
+        :aria-label="`Célula ${idx}`"
+      >
+        {{ cell }}
       </div>
-    <button id="reset">Reset</button>
+    </div>
+
+    <button id="reset" @click="resetGame">Reset</button>
   </div>
-  <script src="script.js"></script>
+
+  <!-- Vue 3 global build -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- app -->
+  <script src="Vue.js"></script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+const app = Vue.createApp({
+    data() {
+        return {
+        today: new Date().toLocaleDateString(),
+        enteredTodo: '',
+        todos: [
+            'Learn a new course',
+            'Read a book',
+            'Go to the gym',
+            'Go shopping'
+        ]
+        }
+    },
+    computed: {
+        // true quando não existe texto significativo em enteredTodo
+        isEmptyTodo() {
+            return this.enteredTodo.trim() === '';
+        }
+    },
+    methods: {
+        submitTodo() {
+        // prevenir refresh é feito pelo @submit.prevent no formulário
+        const text = this.enteredTodo.trim();
+        if (!text) {
+            // não adiciona strings vazias ou só espaços
+            return;
+        }
+        if (this.todos.includes(text)) {
+            // mostrar erro se já existir
+            alert('This task already exists.');
+            return;
+        }
+        this.todos.push(text);
+        this.enteredTodo = ''; // limpar input
+        },
+        deleteTodo(index) {
+        // remove a tarefa pelo índice
+        this.todos.splice(index, 1);
+        }
+    }
+});
+
+app.mount('#app');
