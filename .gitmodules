@@ -11,3 +11,6 @@
 [submodule "LEI 3ano/1 Semestre/CC/space-mission"]
 	path = LEI 3ano/1 Semestre/CC/space-mission
 	url = git@github.com:marcosevegrand/space-mission.git
+[submodule "LEI 3ano/1 Semestre/SD/SD2526"]
+	path = LEI 3ano/1 Semestre/SD/SD2526
+	url = file:///Users/hugo/Documents/SD2526
