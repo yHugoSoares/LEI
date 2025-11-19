@@ -1,50 +1,39 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Todo App</title>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="styles.css">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    </head>
-    <body>
-        <div id="app">
-        <h1 id="title">My Todo List</h1>
-        <!-- Alínea 2: output da data do dia de hoje -->
-        <h3 id="list-date" class="subtitle" v-text="today"></h3>
-        <div class="container">
-            <!-- Alínea 5: adicionar evento para submit -->
-            <form id="todo-form" @submit.prevent="submitTodo">
-            <label class="input-label" for="task-input">Task</label>
-            <div class="input-container">
-                <!-- Alínea 4: controlar o atributo value e adicionar
-                    evento input -->
-                <input 
-                id="task-input" 
-                class="text-input" 
-                name="task-input" 
-                type="text"
-                v-model="enteredTodo"
-                >
-                <button class="button" type="submit" :disabled="isEmptyTodo">Add Todo</button>
-            </div>
-            </form>
-            <ul id="todo-list">
-                <li class="todo-list-item" v-for="(todo, index) in todos" :key="index">
-                    <p>{{ todo }}</p>
-                    <button @click="deleteTodo(index)">Delete</button>
-                </li>
-            </ul>
-            <!-- alternativa A: v-show -->
-            <h3 class="subtitle no-todos" v-show="todos.length === 0">No todos for today!</h3>
-    
-            <!-- Alínea 7: crie um elemento <h3> 
-                e adicione as diretivas necessárias a este elemento
-                e à lista <ul> acima -->
-        </div>
-        </div>
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Jogo do Galo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <h1>Jogo do Galo</h1>
 
-        <script src="Vue.createApp"></script>
-    </body>
+    <div id="controls">
+      <h3 id="status">{{ statusText }}</h3>
+    </div>
+
+    <div id="board" class="board" aria-label="Grelha do Jogo do Galo">
+      <div
+        v-for="(cell, idx) in board"
+        :key="idx"
+        class="cell"
+        :class="cell ? (cell === 'X' ? 'x' : 'o') : ''"
+        @click="handleCellClick(idx)"
+        role="button"
+        :aria-label="`Célula ${idx}`"
+      >
+        {{ cell }}
+      </div>
+    </div>
+
+    <button id="reset" @click="resetGame">Reset</button>
+  </div>
+
+  <!-- Vue 3 global build -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- app -->
+  <script src="Vue.js"></script>
+</body>
 </html>
