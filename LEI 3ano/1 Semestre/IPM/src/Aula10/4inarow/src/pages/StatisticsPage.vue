@@ -33,7 +33,39 @@ export default {
       }
     },
     async getGames() {
-      
+      try {
+        const response = await fetch('http://localhost:3000/games');
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch games');
+        }
+
+        const data = await response.json();
+        // Converter o objecto game do backend para instância de Game
+        const arr = Array.isArray(data) ? data.map(g => {
+          const gameObj = g.game || {};
+          const gameInstance = new Game();
+          // sobrescrever estado interno com os valores guardados
+          gameInstance.board = gameObj.board || gameInstance.board;
+          gameInstance.player = typeof gameObj.player !== 'undefined' ? gameObj.player : gameInstance.player;
+          gameInstance.winner = typeof gameObj.winner !== 'undefined' ? gameObj.winner : gameInstance.winner;
+          gameInstance.isOver = typeof gameObj.isOver !== 'undefined' ? gameObj.isOver : gameInstance.isOver;
+          // retornar uma cópia do registo com a instância
+          return { ...g, game: gameInstance };
+        }) : [];
+
+        // Ordenar por data ISO: mais recente primeiro
+        arr.sort((a, b) => {
+          const da = a.date ? new Date(a.date) : new Date(0);
+          const db = b.date ? new Date(b.date) : new Date(0);
+          return db - da;
+        });
+
+        this.games = arr;
+      } catch (error) {
+        console.error(error);
+        this.games = [];
+      }
     },
     showDate(dateString) {
       const date = new Date(dateString);
@@ -50,6 +82,10 @@ export default {
       }
 
       return 'Draw';
+    },
+    openGame(id) {
+      // navega para /game/:id
+      this.$router.push(`/game/${id}`);
     }
   },
   created() {
@@ -84,6 +120,7 @@ export default {
           yellow: g.game.winner === 1,
           draw: g.game.winner === 2
         }]"
+        @click="openGame(g.id)"
         >
         <div class="info-container">
           <p class="date">{{ showDate(g.date) }}</p>
