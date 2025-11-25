@@ -2,7 +2,7 @@
   "statistics": [
     {
       "id": "1",
-      "red": 1,
+      "red": 5,
       "yellow": 2,
       "draw": 0
     }
@@ -88,13 +88,630 @@
         "isOver": true
       },
       "date": "2025-11-14T10:50:30.172Z"
+    },
+    {
+      "id": "712b",
+      "game": {
+        "board": [
+          [],
+          [
+            false
+          ],
+          [
+            false,
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          [],
+          []
+        ],
+        "player": true,
+        "winner": 1,
+        "isOver": true
+      },
+      "date": "2025-11-19T11:45:03.021Z"
+    },
+    {
+      "id": "c9b3",
+      "game": {
+        "board": [
+          [],
+          [],
+          [],
+          [],
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            false,
+            false,
+            false
+          ],
+          []
+        ],
+        "player": false,
+        "winner": 0,
+        "isOver": true
+      },
+      "date": "2025-11-19T11:46:10.005Z"
+    },
+    {
+      "id": "60d8",
+      "game": {
+        "board": [
+          [
+            true
+          ],
+          [
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true,
+            false
+          ],
+          [
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true,
+            false
+          ]
+        ],
+        "player": false,
+        "winner": 0,
+        "isOver": true
+      },
+      "date": "2025-11-19T11:49:09.587Z"
+    },
+    {
+      "id": "3c76",
+      "game": {
+        "board": [
+          [],
+          [],
+          [],
+          [
+            false,
+            false
+          ],
+          [
+            true,
+            true,
+            true
+          ],
+          [
+            false,
+            false,
+            false,
+            false
+          ],
+          [
+            true,
+            true
+          ]
+        ],
+        "player": true,
+        "winner": 1,
+        "isOver": true
+      },
+      "date": "2025-11-19T11:49:18.954Z"
+    },
+    {
+      "id": "1572",
+      "game": {
+        "board": [
+          [],
+          [],
+          [],
+          [
+            true,
+            true,
+            true,
+            true
+          ],
+          [
+            false,
+            false,
+            false
+          ],
+          [],
+          []
+        ],
+        "player": false,
+        "winner": 0,
+        "isOver": true
+      },
+      "date": "2025-11-19T11:50:22.019Z"
+    },
+    {
+      "id": "b861",
+      "game": {
+        "board": [
+          [],
+          [
+            true
+          ],
+          [
+            true,
+            true,
+            true
+          ],
+          [
+            false,
+            false,
+            false,
+            false
+          ],
+          [],
+          [],
+          []
+        ],
+        "player": true,
+        "winner": 1,
+        "isOver": true
+      },
+      "date": "2025-11-19T11:50:42.005Z"
+    },
+    {
+      "id": "76d4",
+      "game": {
+        "board": [
+          [],
+          [],
+          [],
+          [
+            false,
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            false
+          ]
+        ],
+        "player": true,
+        "winner": 1,
+        "isOver": true
+      },
+      "date": "2025-11-19T11:55:16.720Z"
+    },
+    {
+      "id": "65dd",
+      "game": {
+        "board": [
+          [],
+          [
+            true
+          ],
+          [
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            true,
+            false,
+            true,
+            false
+          ],
+          [],
+          []
+        ],
+        "player": false,
+        "winner": 0,
+        "isOver": true
+      },
+      "date": "2025-11-19T11:56:52.003Z"
+    },
+    {
+      "id": "b288",
+      "game": {
+        "board": [
+          [],
+          [
+            false
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [],
+          []
+        ],
+        "player": true,
+        "winner": 1,
+        "isOver": true
+      },
+      "date": "2025-11-19T12:00:29.942Z"
+    },
+    {
+      "id": "a437",
+      "game": {
+        "board": [
+          [],
+          [
+            false
+          ],
+          [
+            false,
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            false,
+            true,
+            false,
+            true,
+            false,
+            true
+          ]
+        ],
+        "player": true,
+        "winner": 1,
+        "isOver": true
+      },
+      "date": "2025-11-19T12:00:55.992Z"
+    },
+    {
+      "id": "cb3e",
+      "game": {
+        "board": [
+          [],
+          [],
+          [
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          []
+        ],
+        "player": false,
+        "winner": 0,
+        "isOver": true
+      },
+      "date": "2025-11-19T12:02:01.658Z"
+    },
+    {
+      "id": "ba14",
+      "game": {
+        "board": [
+          [],
+          [],
+          [],
+          [
+            true,
+            false
+          ],
+          [
+            true,
+            false
+          ],
+          [
+            true,
+            false
+          ],
+          [
+            true
+          ]
+        ],
+        "player": false,
+        "winner": 0,
+        "isOver": true
+      },
+      "date": "2025-11-19T12:06:50.547Z"
+    },
+    {
+      "id": "2531",
+      "game": {
+        "board": [
+          [],
+          [
+            true
+          ],
+          [
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            false,
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ]
+        ],
+        "player": false,
+        "winner": 0,
+        "isOver": true
+      },
+      "date": "2025-11-19T12:07:58.209Z"
+    },
+    {
+      "id": "fb1c",
+      "game": {
+        "board": [
+          [],
+          [
+            true
+          ],
+          [
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            true,
+            false,
+            true,
+            false
+          ],
+          [],
+          [
+            true,
+            false,
+            true,
+            false
+          ]
+        ],
+        "player": false,
+        "winner": 0,
+        "isOver": true
+      },
+      "date": "2025-11-19T12:13:18.379Z"
+    },
+    {
+      "id": "bd0a",
+      "game": {
+        "board": [
+          [],
+          [],
+          [
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          [
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false
+          ],
+          []
+        ],
+        "player": true,
+        "winner": 1,
+        "isOver": true
+      },
+      "date": "2025-11-19T12:27:11.041Z"
+    },
+    {
+      "id": "3ef2",
+      "game": {
+        "board": [
+          [],
+          [
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false
+          ],
+          [
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            true
+          ],
+          []
+        ],
+        "player": true,
+        "winner": 1,
+        "isOver": true
+      },
+      "date": "2025-11-19T12:29:08.443Z"
     }
   ],
   "simulation": [
     {
       "id": "1",
-      "startPlayer": true,
-      "plays": []
+      "startPlayer": false,
+      "plays": [
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        5,
+        5,
+        5,
+        5,
+        1,
+        1,
+        1,
+        1,
+        2
+      ]
     }
   ]
 }
