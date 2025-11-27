@@ -77,12 +77,41 @@ media( L, M ) :-
 par( N ) :-
     0 is N mod 2.
 
+par2 (0).
+par2 (N) :- 
+    N > 0,
+    N1 is N - 2,
+    par2 (N1).
+
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado impar: N -> {V,F}
 
 impar( N ) :-
     1 is N mod 2.
+
+impar2 (1).
+impar2 (N) :- 
+    N > 1,
+    N1 is N - 2,
+    impar2 (N1).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do ordena_crescente: Lista, Resultado -> {V,F}
+
+ordena_crescente( [], [] ).
+ordena_crescente( [X|L], R ) :-
+    ordena_crescente( L, R1 ),
+    inserir_ordenado( X, R1, R ).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do predicado inserir_ordenado: Elemento, Lista, Resultado -> {V,F}
+inserir_ordenado( X, [], [X] ).
+inserir_ordenado( X, [Y|L], [X,Y|L] ) :-
+    X =< Y.
+inserir_ordenado( X, [Y|L], [Y|R] ) :-
+    X > Y,
+    inserir_ordenado( X, L, R ).
 
 % Parte II--------------------------------------------------------- - - - - -
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
@@ -96,34 +125,72 @@ pertence( X,[Y|L] ) :
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado comprimento: Lista,Comprimento -> {V,F}
 
+comprimento ( [], 0 ).
+comprimento ( [X|L], N ) :-
+    comprimento( L, N1 ),
+    N is N1 + 1.
 
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do predicado diferentes: Lista1,Lista2 -> {V,F}
 
+diferentes ( [], _ ).
+diferentes ( [X|L1], L2 ) :-
+    \+ pertence( X, L2 ),
+    diferentes ( L1, L2 ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado quantos: Lista,Comprimento -> {V,F}
 
+quantos( L, N ) :-
+    comprimento( L, N ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado apagar: Elemento,Lista,Resultado -> {V,F}
 
+apagar( _, [], [] ).
+apagar( X, [X|L], R ) :-
+    apagar( X, L, R ).
+apagar( X, [Y|L], [Y|R] ) :-
+    X \= Y,
+    apagar( X, L, R ).
           
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado apagatudo: Elemento,Lista,Resultado -> {V,F}
 
-
+apagatudo( _, [], [] ).
+apagatudo( X, [X|L], R ) :-
+    apagatudo( X, L, R ).
+apagatudo( X, [Y|L], [Y|R] ) :-
+    X \= Y,
+    apagatudo( X, L, R ).
 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado adicionar: Elemento,Lista,Resultado -> {V,F}
 
+adicionar( X, L, [X|L] ) :-
+    \+ pertence( X, L ).
+adicionar( X, L, L ) :-
+    pertence( X, L ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado concatenar: Lista1,Lista2,Resultado -> {V,F}
 
+concatenar( [], L2, L2 ).
+concatenar( [X|L1], L2, [X|R] )
+    :- concatenar( L1, L2, R ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado inverter: Lista,Resultado -> {V,F}
 
+inverter( [], [] ).
+inverter( [X|L], R ) :-
+    inverter( L, R1 ),
+    concatenar( R1, [X], R ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado sublista: SubLista,Lista -> {V,F}
+
+sublista( S,L ) :-
+    concatenar( _, L2, L ),
+    concatenar( S, _, L2 ).
