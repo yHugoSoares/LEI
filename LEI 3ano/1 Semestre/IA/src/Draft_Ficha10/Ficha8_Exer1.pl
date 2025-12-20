@@ -41,3 +41,76 @@ nota(3,5,8).
 copia(1,2).
 copia(2,3).
 copia(3,4).
+
+% -------------------------------------------------------------------------
+% Resolução Ficha 10 (baseada na Ficha 8)
+% -------------------------------------------------------------------------
+
+% i. Quais os alunos que não estão inscritos em qualquer disciplina
+nao_inscrito(ID) :-
+    aluno(ID, _, _),
+    \+ inscrito(ID, _).
+
+% ii. Quais os alunos que não estão inscritos em qualquer disciplina, 
+% assumindo que um aluno inscrito numa disciplina que não existe não está inscrito
+inscrito_valido(ID) :-
+    inscrito(ID, D),
+    disciplina(D, _, _, _).
+
+nao_inscrito_total(ID) :-
+    aluno(ID, _, _),
+    \+ inscrito_valido(ID).
+
+% iii. Qual a média de um determinado aluno
+soma_lista([], 0).
+soma_lista([H|T], S) :-
+    soma_lista(T, S1),
+    S is S1 + H.
+
+comprimento_lista([], 0).
+comprimento_lista([_|T], C) :-
+    comprimento_lista(T, C1),
+    C is C1 + 1.
+
+media_aluno(ID, Media) :-
+    findall(Nota, nota(ID, _, Nota), Notas),
+    Notas \= [],
+    soma_lista(Notas, Soma),
+    comprimento_lista(Notas, Total),
+    Media is Soma / Total.
+
+% iv. Quais os alunos cuja média é acima da média (considere todas as notas de todas as disciplinas)
+media_geral(Media) :-
+    findall(Nota, nota(_, _, Nota), Notas),
+    soma_lista(Notas, Soma),
+    comprimento_lista(Notas, Total),
+    Total > 0,
+    Media is Soma / Total.
+
+aluno_acima_media(ID) :-
+    media_geral(MediaGeral),
+    media_aluno(ID, MediaAluno),
+    MediaAluno > MediaGeral.
+
+% v. Quais os nomes dos alunos que copiaram
+nome_copiador(Nome) :-
+    copia(ID, _),
+    aluno(ID, Nome, _).
+
+nomes_copiadores(L) :-
+    setof(Nome, nome_copiador(Nome), L).
+
+% vi. Quais os alunos que copiaram (diretamente ou indiretamente) por um dado aluno
+% copiou_de(Quem, DeQuem).
+copiou_de(X, Y) :- copia(X, Y).
+copiou_de(X, Y) :- copia(X, Z), copiou_de(Z, Y).
+
+% vii. mapToNome - converter uma lista de números de alunos numa lista de nomes. 
+% Assuma que podem ser dados números de alunos não registados (que devem ser ignorados).
+mapToNome([], []).
+mapToNome([ID|T], [Nome|TN]) :-
+    aluno(ID, Nome, _),
+    mapToNome(T, TN).
+mapToNome([ID|T], TN) :-
+    \+ aluno(ID, _, _),
+    mapToNome(T, TN).
