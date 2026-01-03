@@ -1,20 +1,44 @@
 estudante(joao).
 
-inscrito(Nome, Disciplina) :-
-    estudante(Nome).
-
 inscrito(joao, ia).
-
-nota(Nome, Disciplina, Nota) :-
-    inscrito(Nome, Disciplina).
 
 nota(joao, ia, 15).
 
-distincao(Nome) :-
-    nota(Nome, ia, Nota),
+distincao(Nome, Disciplina) :-
+    nota(Nome, Disciplina, Nota),
     Nota >= 14.
 
 desporto(Nome) :-
     estudante(Nome).
 
-professor_leciona(Nome, Disciplina)
+professor_leciona(_, Disciplina) :-
+    inscrito(_, Disciplina).
+
+
+distincao_em_ia(Nome) :-
+    distincao(Nome, ia).
+
+
+disciplinas_nome(Nome, Count) :-
+    findall(Disciplina, inscrito(Nome, Disciplina), Disciplinas),
+    length(Disciplinas, Count).
+
+
+
+% ============================= Grupo 2 ============================= %
+
+animal(gato).
+animal(cão).
+animal(pardal).
+
+mamífero(gato).
+mamífero(cão).
+
+ave(pardal).
+
+voa(pardal).
+voa(X) :- ave(X), não_prejudicado(X).
+
+prejudicado(pinguim).
+
+não_prejudicado(X) :- animal(X), \+ prejudicado(X).
