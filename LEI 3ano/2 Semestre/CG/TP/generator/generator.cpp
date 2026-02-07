@@ -91,6 +91,178 @@ void generateSphere(float radius, int slices, int stacks, const std::string& fil
     saveFile(filename, points);
 }
 
+// Generates a box centered at the origin
+void generateBox(float length, int divisions, const std::string& filename) {
+    std::vector<Point> points;
+    float half = length / 2.0f;
+    float step = length / (float)divisions;
+
+    // Front face (Z = half)
+    for (int i = 0; i < divisions; i++) {
+        for (int j = 0; j < divisions; j++) {
+            float x1 = -half + i * step;
+            float y1 = -half + j * step;
+            float x2 = x1 + step;
+            float y2 = y1 + step;
+            
+            points.push_back({x1, y1, half});
+            points.push_back({x1, y2, half});
+            points.push_back({x2, y2, half});
+            
+            points.push_back({x1, y1, half});
+            points.push_back({x2, y2, half});
+            points.push_back({x2, y1, half});
+        }
+    }
+
+    // Back face (Z = -half)
+    for (int i = 0; i < divisions; i++) {
+        for (int j = 0; j < divisions; j++) {
+            float x1 = -half + i * step;
+            float y1 = -half + j * step;
+            float x2 = x1 + step;
+            float y2 = y1 + step;
+            
+            points.push_back({x1, y1, -half});
+            points.push_back({x2, y2, -half});
+            points.push_back({x1, y2, -half});
+            
+            points.push_back({x1, y1, -half});
+            points.push_back({x2, y1, -half});
+            points.push_back({x2, y2, -half});
+        }
+    }
+
+    // Right face (X = half)
+    for (int i = 0; i < divisions; i++) {
+        for (int j = 0; j < divisions; j++) {
+            float z1 = -half + i * step;
+            float y1 = -half + j * step;
+            float z2 = z1 + step;
+            float y2 = y1 + step;
+            
+            points.push_back({half, y1, z1});
+            points.push_back({half, y2, z2});
+            points.push_back({half, y2, z1});
+            
+            points.push_back({half, y1, z1});
+            points.push_back({half, y1, z2});
+            points.push_back({half, y2, z2});
+        }
+    }
+
+    // Left face (X = -half)
+    for (int i = 0; i < divisions; i++) {
+        for (int j = 0; j < divisions; j++) {
+            float z1 = -half + i * step;
+            float y1 = -half + j * step;
+            float z2 = z1 + step;
+            float y2 = y1 + step;
+            
+            points.push_back({-half, y1, z1});
+            points.push_back({-half, y2, z1});
+            points.push_back({-half, y2, z2});
+            
+            points.push_back({-half, y1, z1});
+            points.push_back({-half, y2, z2});
+            points.push_back({-half, y1, z2});
+        }
+    }
+
+    // Top face (Y = half)
+    for (int i = 0; i < divisions; i++) {
+        for (int j = 0; j < divisions; j++) {
+            float x1 = -half + i * step;
+            float z1 = -half + j * step;
+            float x2 = x1 + step;
+            float z2 = z1 + step;
+            
+            points.push_back({x1, half, z1});
+            points.push_back({x2, half, z2});
+            points.push_back({x1, half, z2});
+            
+            points.push_back({x1, half, z1});
+            points.push_back({x2, half, z1});
+            points.push_back({x2, half, z2});
+        }
+    }
+
+    // Bottom face (Y = -half)
+    for (int i = 0; i < divisions; i++) {
+        for (int j = 0; j < divisions; j++) {
+            float x1 = -half + i * step;
+            float z1 = -half + j * step;
+            float x2 = x1 + step;
+            float z2 = z1 + step;
+            
+            points.push_back({x1, -half, z1});
+            points.push_back({x1, -half, z2});
+            points.push_back({x2, -half, z2});
+            
+            points.push_back({x1, -half, z1});
+            points.push_back({x2, -half, z2});
+            points.push_back({x2, -half, z1});
+        }
+    }
+
+    saveFile(filename, points);
+}
+
+// Generates a cone centered at the origin with base on XZ plane
+void generateCone(float radius, float height, int slices, int stacks, const std::string& filename) {
+    std::vector<Point> points;
+    float pi = 3.14159265359f;
+    
+    // Generate the sides of the cone
+    for (int i = 0; i < stacks; i++) {
+        float y1 = (float)i / stacks * height;
+        float y2 = (float)(i + 1) / stacks * height;
+        float r1 = radius * (1.0f - (float)i / stacks);
+        float r2 = radius * (1.0f - (float)(i + 1) / stacks);
+        
+        for (int j = 0; j < slices; j++) {
+            float angle1 = 2 * pi * (float)j / slices;
+            float angle2 = 2 * pi * (float)(j + 1) / slices;
+            
+            float x1 = r1 * sin(angle1);
+            float z1 = r1 * cos(angle1);
+            float x2 = r1 * sin(angle2);
+            float z2 = r1 * cos(angle2);
+            float x3 = r2 * sin(angle2);
+            float z3 = r2 * cos(angle2);
+            float x4 = r2 * sin(angle1);
+            float z4 = r2 * cos(angle1);
+            
+            // Two triangles per quad
+            points.push_back({x1, y1, z1});
+            points.push_back({x2, y1, z2});
+            points.push_back({x3, y2, z3});
+            
+            points.push_back({x1, y1, z1});
+            points.push_back({x3, y2, z3});
+            points.push_back({x4, y2, z4});
+        }
+    }
+    
+    // Generate the base of the cone
+    for (int j = 0; j < slices; j++) {
+        float angle1 = 2 * pi * (float)j / slices;
+        float angle2 = 2 * pi * (float)(j + 1) / slices;
+        
+        float x1 = radius * sin(angle1);
+        float z1 = radius * cos(angle1);
+        float x2 = radius * sin(angle2);
+        float z2 = radius * cos(angle2);
+        
+        // Triangle from center to edge
+        points.push_back({0, 0, 0});
+        points.push_back({x2, 0, z2});
+        points.push_back({x1, 0, z1});
+    }
+    
+    saveFile(filename, points);
+}
+
 int main(int argc, char** argv) {
     if (argc < 2) {
         std::cout << "Usage: ./generator <shape> <args> <output_file>" << std::endl;
@@ -110,7 +282,18 @@ int main(int argc, char** argv) {
         int stacks = std::stoi(argv[4]);
         generateSphere(radius, slices, stacks, argv[5]);
     }
-    // Add logic for "box", "cone" here...
+    else if (shape == "box" && argc == 5) {
+        float length = std::stof(argv[2]);
+        int divisions = std::stoi(argv[3]);
+        generateBox(length, divisions, argv[4]);
+    }
+    else if (shape == "cone" && argc == 7) {
+        float radius = std::stof(argv[2]);
+        float height = std::stof(argv[3]);
+        int slices = std::stoi(argv[4]);
+        int stacks = std::stoi(argv[5]);
+        generateCone(radius, height, slices, stacks, argv[6]);
+    }
     else {
         std::cout << "Invalid arguments or shape." << std::endl;
     }
