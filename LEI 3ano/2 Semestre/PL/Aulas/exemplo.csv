@@ -1,0 +1,51 @@
+id,email,password,phone-number,postal-code,licence-plate
+1,luke.skywalker@rebels.net, Force2024,(001)912345678,1234-5637,SW-77-JD
+2,leia.organa@rebels.net,HopeA1,913456789,2345-678,AL-12-DR
+3,han.solo@falcon,Shot1stH,(44)914567890,3456-789,HS-45-34
+4,darth.vader@empire.gov,  DarkSide,9156785901,4567-890,DV-66-ST
+5,frodo.baggins@shire.me,Ring1Bear,(351)916789012,5678-901,FB-01-SH
+6,sam.gamgee@shire.me,Potatoe2,917890123,6789-012,SG-22-GM
+7,gandalf.grey@istari.org,YouShall9,(49)918901234,7890_123,GG-99-34
+8,aragorn..elessar@gondor.gov,KingA24,919012345,8901-234,33-87-24
+9,neo.anderson@matrix.io,RedPill1,112345267,9012-345,NA-01-MX
+10,trinity@matrix.io,DodgeThis7,922345678,1123-456,TR-88-MX
+11,morpheus@matrix.io,0110100100101,933456789,2234-567,M4-55-ZN
+12,tony.stark@avengers.org , IAmIron9,944567890,3345-678,TS-08-IM
+13,steve.rogers@avengers.org,Shield42A,955678901,4456-789,SR-42-CA
+14,bruce.banner@avengers.org,HulkSm4sh,966789012,5567-890,BB-00-23
+15,natasha.romanoff@avengers.org,SpyCraft7,977890123,6678-901,NR-77-RD
+16,.peter.parker@dailybugle.com,Sp1derMan,988901234,7789-012,PP-01-SM
+17,logan.wolverine@xmen.edu, Claws6X,(1)999012345 , 88390-123,LW-10-34
+18,charles.xavier@xmen.edu,  MindRead9,900123456,9901-234,CX-99-MD
+19,geralt.of.rivia@witchers.org,TossAC01n,901234567,1012-345,GR-07-WT
+20,ciri@witchers.org, ElderB10d   ,902345678,2023-456,CI-88-EL
+21,kratos@olympus.god,BOY2024K,903456789,3034-567,KR-09-GW
+22,atreus@midgard.world,ArrowA1m,904567890,4045-678,AT-11-MG
+23,ellie.williams@fireflies.org,LastOfU5,905678901,5056-789,75-EW-TL
+24,joel.miller@fireflies.org,Surviv0r,906789012,6067-890,JM-99-FS
+25,master.chief@unsc@mil,Spartan117,907890123,7078-901,MC-17-HL
+26, cortana@unsc.mil, SmartAI9,908901234,  8089-012,CT-01-AI
+27,zelda.hyrule@triforce.net,19860011  ,()909012345,9090-123,ZH-07-TF
+28,link@hyrule.net,  Hyaa2024L,910123456,0101-234,LK-24-HY
+29,mario.rossi@kingdom.it,ItsMeMario,(39)921234567,1212-345,MR-64-34
+30,luigi.rossi@kingdom.it,GreenM4n,932345678,  2323-456,LR-01-GN
+31,  cloud.strife@avalanche.org,BusterSw0, (91)9843456789,3434-567,CS-07-FF
+32,tifa.lockhart@avalanche.org,Heaven7T,954567890,4545-678,TL-FF-AV
+33,arthur.dent@galaxy.net,NoPanic42,(4674)965678901,5656-789,AD-42-GX
+34,ford.prefect@galaxy.net,Betelgeu5,769789012,6767-890,FP-05-HG
+35,rick.sanchez@dimension.tv,PickleR,987890123,7878-901,RS-99-CN
+36,morty.smith@dimension.tv,OhGeez9,998901234,889-012,MS-01-RK
+37 , daenerys.targaryen@westeros.org,Dracarys7,(33)909876543,9098-765,DT-01-DR
+38,jon.snow@westeros.org,KnowN0th1,908765432,8087-654,JS-09-NR
+39,tyrion.lannister@westeros.org,DrinkThink8   ,  (034)907654321,7076-543,TL-03-LN
+40,walter.white@heisenberg.lab,BlueSky99,906543210,6065-432,WW-08-BS
+41,jesse.pinkman@heisenberg.lab,YeahSc13,(01)905432109,5054-321,JP-13-YE
+42,saul.good.man@legal.biz,BetterC4ll,904321098,4043-10,SG-04-LW
+43,indiana.jones@adventure.edu,Snakes77I,(01)903210987,3032-109,IJ-77-AR
+44,lara.croft@tombraider.org,Pist0lsLC,902109876,2021-098,LC-01-TR
+45,solid.snake.@foxhound.mil,Codec141,(81)901098765,1010-987  ,SS.41.MG
+46,raiden@foxhound.mil,Lightning9,912987654,2129-876,RD-09-FH
+47,agent.smith@matrix.io,MrAnders0n,(1)923876543,3238-765,  AS-99-MX
+48,aloy@horizon.world,NoraBr4ve,934765432,4347-654,AL-01-HZ
+49,krillin@capsule.co,Destruct0,(081)(94)5654321,5456-543,  KR-06-DB
+50,goku@saiyan.planet,  Kameh4me,956543210,  6565-432  ,GK-59-ZF
