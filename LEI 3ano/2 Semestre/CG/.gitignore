@@ -1,0 +1,127 @@
+# CMake build files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+CMakeScratch/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+Makefile
+*.cmake
+CMakeConfigureLog.yaml
+InstallScripts.json
+pkgRedirects/
+
+# CMake build configuration files
+*.dir/
+build.make
+cmake_clean.cmake
+compiler_depend.*
+depend.make
+DependInfo.cmake
+flags.make
+link.txt
+progress.make
+progress.marks
+TargetDirectories.txt
+Makefile2
+
+# Build directories
+build/
+bin/
+lib/
+out/
+
+# Executables
+*.exe
+*.out
+*.app
+class2
+class3
+class4
+class5
+class6
+class7
+class8
+aula*
+Aula*
+engine
+generator
+
+# Object files
+*.o
+*.obj
+*.ko
+*.elf
+
+# Dependency files
+*.d
+
+# Generated TypeScript files from CMake
+*.ts
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Backup files
+*.bak
+*.tmp
+*~
+
+# Keep CMakeLists.txt
+!CMakeLists.txt
+
+# Keep source model files
+!models/*.3d
+
+# Keep XML configuration files
+!*.xml
