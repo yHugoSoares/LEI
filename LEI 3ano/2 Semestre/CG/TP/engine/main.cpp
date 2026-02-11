@@ -26,7 +26,7 @@ struct Camera {
 
 struct Window {
     int width, height;
-} windowConfig = {800, 600};
+} windowConfig = {1600, 900};
 
 // Global list to store all vertices loaded from .3d files
 std::vector<Point> scenePoints;
