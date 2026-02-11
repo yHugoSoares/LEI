@@ -1,1 +1,0 @@
-/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/class2.dir/main.cpp.o -o class2  -framework OpenGL -framework OpenGL -framework GLUT -framework Cocoa
