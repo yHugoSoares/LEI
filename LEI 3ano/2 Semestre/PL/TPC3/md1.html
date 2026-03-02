@@ -1,0 +1,139 @@
+<h1>Platform Architecture Handbook</h1>
+This handbook describes the architecture, operating principles, and design philosophy of the Core Platform.
+It is written for engineers, architects, and technical leadership who need <em>shared vocabulary</em> and <strong>shared expectations</strong>.
+Inline references such as issue#1001, ref#42, and tags like #platform or #reliability may appear as normal text.
+
+<h2>How to Read This</h2>
+Skim the headings first, then revisit details as needed.
+If you see expressions like 7*6=42, patterns like data*backup, or words like *nix, treat the asterisks literally.
+
+<ul>
+ <li>Read for intent, not for perfection</li>
+ <li>Prefer <em>small</em> changes over heroic rewrites</li>
+ <li>Challenge unclear assumptions, but keep <strong>decision logs</strong> short</li>
+ <li>When in doubt, document the trade-off</li>
+</ul>
+
+<h1>Principles</h1>
+The platform evolves under pressure, so principles keep us aligned.
+We prefer <em>clarity</em> to cleverness and <strong>feedback loops</strong> to speculation.
+
+<h2>Reliability First</h2>
+Reliability is a product feature.
+We invest in <em>predictability</em>, <strong>observability</strong>, and controlled failure.
+
+<ul>
+ <li>Alert on symptoms users notice</li>
+ <li>Make dashboards <em>boring</em> and consistent</li>
+ <li>Keep runbooks <strong>actionable</strong> and brief</li>
+ <li>Avoid “magic” auto-healing unless the behavior is documented</li>
+</ul>
+
+<h2>Ownership and Boundaries</h2>
+Ownership reduces confusion.
+Each service has a <em>single</em> owning team and a <strong>clear</strong> interface.
+
+<ol>
+ <li>Define inputs and outputs explicitly</li>
+ <li>Document failure modes and retries</li>
+ <li>Publish schemas and deprecation timelines</li>
+ <li>Review ownership quarterly</li>
+</ol>
+
+<h1>System Overview</h1>
+At a high level, the platform consists of ingestion, processing, and publishing components.
+The overview is intentionally <em>high level</em> but <strong>precise</strong>.
+
+<h2>Ingestion Layer</h2>
+Ingestion accepts data from upstream producers.
+It validates inputs with <em>cheap checks</em> and preserves raw payloads for <strong>auditability</strong>.
+
+<ul>
+ <li>Accept data from internal and external sources</li>
+ <li>Validate schemas and reject malformed events</li>
+ <li>Preserve raw payloads for <strong>forensics</strong></li>
+ <li>Tag events with <em>minimal</em> metadata</li>
+</ul>
+
+<h2>Processing Layer</h2>
+Processing transforms raw events into structured formats.
+This is where most business logic lives and where <strong>complexity</strong> tends to accumulate.
+
+<ol>
+ <li>Load raw events from durable storage</li>
+ <li>Apply transformation and enrichment rules</li>
+ <li>Validate output against schemas</li>
+ <li>Persist results and emit metrics</li>
+ <li>Record <em>why</em> and <strong>what</strong> changed</li>
+</ol>
+
+<h2>Publishing Layer</h2>
+Publishing exposes processed data to consumers such as dashboards and downstream services.
+The goal is <em>stable contracts</em> and <strong>safe evolution</strong>.
+
+<ul>
+ <li>Support multiple output formats</li>
+ <li>Keep schemas <strong>consistent</strong> across versions</li>
+ <li>Provide migrations for breaking changes</li>
+ <li>Communicate <em>early</em> and clearly</li>
+</ul>
+
+<h1>Versioning and Compatibility</h1>
+We use semantic versioning for externally visible interfaces.
+Version numbers like 2.0.1 and references like section 4.2 are prose, not ordered lists.
+
+<h2>Semantic Versioning Rules</h2>
+The rules are simple and must be applied consistently.
+
+<ol>
+ <li>Increment major for breaking changes</li>
+ <li>Increment minor for backward-compatible features</li>
+ <li>Increment patch for bug fixes</li>
+ <li>Document <em>why</em> the bump happened</li>
+</ol>
+
+<h2>Deprecation Policy</h2>
+Deprecations should be boring.
+A good deprecation is <em>announced</em>, <strong>tracked</strong>, and removed on schedule.
+
+<ul>
+ <li>Announce the change and the timeline</li>
+ <li>Provide migration guidance</li>
+ <li>Track adoption with <strong>metrics</strong></li>
+ <li>Remove old paths and delete dead code</li>
+</ul>
+
+<h1>Operations</h1>
+Operations is where design meets reality.
+The goal is <em>calm response</em> and <strong>repeatable</strong> actions.
+
+<h2>Incident Response</h2>
+Incidents happen; panic makes them worse.
+
+<ol>
+ <li>Assess impact and severity</li>
+ <li>Stabilize user-facing symptoms</li>
+ <li>Communicate <em>what we know</em> and <strong>what we are doing</strong></li>
+ <li>Investigate root causes</li>
+ <li>Track follow-ups to closure</li>
+</ol>
+
+<h2>Documentation Standards</h2>
+Documentation is a first-class artifact.
+It should be <em>understandable</em> and <strong>current</strong>.
+
+<ul>
+ <li>Write for a general technical audience</li>
+ <li>Avoid unexplained acronyms</li>
+ <li>Highlight <strong>constraints</strong> and assumptions</li>
+ <li>Include <em>examples</em> of common paths</li>
+</ul>
+
+<h1>Closing Notes</h1>
+This handbook is a living document.
+Propose improvements when something is unclear, <strong>incorrect</strong>, or <em>missing</em>.
+
+<ul>
+ <li>Final reminder: tokens like pre*post and end*of*word are not emphasis</li>
+ <li>Final reminder: inline tags like #review and issue#777 are not headers</li>
+</ul>
