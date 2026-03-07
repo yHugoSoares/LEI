@@ -13,12 +13,12 @@ The repository is organized by academic year and course units:
   - 2nd Semester missing 1 course.
 
 - **2nd Year**
-  - 1st Semester missing 2 courses.
+  - 1st Semester Done
   - 2nd Semester missing 1 course.
 
 - **3rd Year**
-  - 1st Semester Doing.
-  - 2nd Semester Not Started.
+  - 1st Semester missing 1 course.
+  - 2nd Semester Doing.
 
 ## Technologies and Languages
 
