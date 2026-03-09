@@ -1,0 +1,7 @@
+{
+  "LPAREN": "\\(",
+  "RPAREN": "\\)",
+  "VAL": "\\d+",
+  "IGNORE": "[ \\t]+",
+  "NEWLINE": "\\n"
+}
