@@ -1,0 +1,16 @@
+{
+  "VAR": "var",
+  "TRUE": "True",
+  "FALSE": "False",
+  "IMPLIES": "=>",
+  "AND": "\\\\/",
+  "OR": "\\\\\\/",
+  "NOT": "!",
+  "LPAREN": "\\(",
+  "RPAREN": "\\)",
+  "COLON": ",",
+  "SEMICOLON": ";",
+  "IDEN": "[A-Za-z][A-Za-z0-9_]*",
+  "IGNORE": "[ \\t]+",
+  "NEWLINE": "\\n"
+}
