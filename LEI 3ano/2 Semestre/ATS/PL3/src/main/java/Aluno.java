@@ -8,7 +8,8 @@ public class Aluno {
     private String numero;
     private Map<String, Double> notas = new HashMap<String, Double>();
 
-    public Aluno() {}
+    public Aluno() {
+    }
 
     public Aluno(String nome, String numero) {
         this.nome = nome;
@@ -46,7 +47,8 @@ public class Aluno {
      * If there are no grades, returns 0.0 to avoid NaN results.
      */
     public double media() {
-        if (notas.isEmpty()) return 0.0;
+        if (notas.isEmpty())
+            return 0.0;
         double soma = 0.0;
         for (double nota : notas.values()) {
             soma += nota;
@@ -64,7 +66,7 @@ public class Aluno {
     }
 
     public void setNota(String disciplina, double nota)
-        throws NotaInvalidaException {
+            throws NotaInvalidaException {
         if (nota >= 0 && nota <= 20) {
             notas.put(disciplina, nota);
         } else {
@@ -73,14 +75,15 @@ public class Aluno {
     }
 
     public double incrementaNota(String disciplina, double incremento)
-        throws NotaInvalidaException {
+            throws NotaInvalidaException {
         Double atual = notas.get(disciplina);
         if (atual == null) {
             // If there's no existing grade, treat as adding incremento to 0.0
             atual = 0.0;
         }
         double novaNota = atual + incremento;
-        if (novaNota < 0 || novaNota > 20) throw new NotaInvalidaException();
+        if (novaNota < 0 || novaNota > 20)
+            throw new NotaInvalidaException();
         notas.put(disciplina, novaNota);
         return novaNota;
     }
@@ -92,8 +95,10 @@ public class Aluno {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Aluno aluno = (Aluno) o;
         return Objects.equals(numero, aluno.numero);
     }
