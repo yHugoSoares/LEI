@@ -17,6 +17,6 @@
 [submodule "LEI 3ano/2 Semestre/CG/CG2526"]
 	path = LEI 3ano/2 Semestre/CG/CG2526
 	url = git@github.com:yHugoSoares/CG2526.git
-[submodule "LEI_3ano/2_Semestre/SSI/2526-G39"]
-	path = LEI_3ano/2_Semestre/SSI/2526-G39
+[submodule "LEI 3ano/2 Semestre/SSI/2526-G39"]
+	path = LEI 3ano/2 Semestre/SSI/2526-G39
 	url = https://github.com/uminho-lei-ssi/2526-G39
