@@ -78,6 +78,6 @@ else (WIN32) #Linux and Mac
 	
 endif(WIN32)
 
-file(COPY ${CMAKE_SOURCE_DIR}/terreno.jpg DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY ${CMAKE_SOURCE_DIR}/terreno.png DESTINATION ${CMAKE_BINARY_DIR})
 
 

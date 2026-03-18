@@ -1,0 +1,132 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "DevIL::IL::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DevIL__IL-Debug-dc62514d5c39ebff0b68.json",
+					"name" : "DevIL::IL",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "DevIL::ILU::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DevIL__ILU-Debug-22c4f4c951a9834e6b14.json",
+					"name" : "DevIL::ILU",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "DevIL::ILUT::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DevIL__ILUT-Debug-dc47249d0a761215041b.json",
+					"name" : "DevIL::ILUT",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "GLUT::Cocoa::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-GLUT__Cocoa-Debug-1dd78961c59ceb188e46.json",
+					"name" : "GLUT::Cocoa",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "GLUT::GLUT::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-GLUT__GLUT-Debug-493af0ab1f0659356c50.json",
+					"name" : "GLUT::GLUT",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "OpenGL::GL::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-OpenGL__GL-Debug-1df963649ac7d8c7373c.json",
+					"name" : "OpenGL::GL",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "OpenGL::GLU::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-OpenGL__GLU-Debug-aa104d443c73a668fa75.json",
+					"name" : "OpenGL::GLU",
+					"projectIndex" : 0
+				}
+			],
+			"directories" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					],
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-9ad1a58d4644cf6543fa.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "class6",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "class6::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-class6-Debug-6ef10f59369a5f0210f7.json",
+					"name" : "class6",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/CG/PL/Aula6/src/build",
+		"source" : "/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/CG/PL/Aula6/src"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 9
+	}
+}
