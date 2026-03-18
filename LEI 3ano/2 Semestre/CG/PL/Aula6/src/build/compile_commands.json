@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/CG/PL/Aula6/src/build",
+  "command": "/usr/bin/clang++  -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/GLUT.framework/Headers -I/opt/homebrew/include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -arch arm64 -o CMakeFiles/class6.dir/main.cpp.o -c \"/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/CG/PL/Aula6/src/main.cpp\"",
+  "file": "/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/CG/PL/Aula6/src/main.cpp",
+  "output": "CMakeFiles/class6.dir/main.cpp.o"
+}
+]

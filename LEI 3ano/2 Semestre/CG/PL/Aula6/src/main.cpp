@@ -1,5 +1,5 @@
 
-
+#define GL_SILENCE_DEPRECATION
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -17,10 +17,12 @@
 #endif
 
 
-float camX = 00, camY = 30, camZ = 40;
+// Camera data: eye position and looking direction (alpha, beta)
+float camX = 0.0f, camY = 0.0f, camZ = 0.0f;
+float alpha = 0.0f; // horizontal angle
+float beta = 0.0f;  // vertical angle
+const float eyeHeight = 2.0f;
 int startX, startY, tracking = 0;
-
-int alpha = 0, beta = 45, r = 50;
 
 // Grid data: one vertex per image pixel (x, y, z) with height = 0.0
 static std::vector<float> g_vertices;
@@ -31,6 +33,11 @@ static GLuint g_vbo = 0;
 static int g_stripVertexCount = 0; // total number of vertices in g_stripVertices
 static int g_stripVerticesPerRow = 0; // number of vertices in one triangle strip (2 * g_imgW)
 
+struct TreePos {
+	float x, z;
+};
+static std::vector<TreePos> g_treePositions;
+
 // Return height for pixel at column i, row j (i in [0..g_imgW), j in [0..g_imgH))
 float h(int i, int j) {
 	if (g_imgW <= 0 || g_imgH <= 0) return 0.0f;
@@ -38,7 +45,26 @@ float h(int i, int j) {
 	if (j < 0) j = 0; if (j >= g_imgH) j = g_imgH - 1;
 	if (g_imgData.empty()) return 0.0f;
 	unsigned char v = g_imgData[(size_t)j * (size_t)g_imgW + (size_t)i];
-	return (v / 255.0f) * 10.0f; // scale 0-255 -> 0-60 meters
+	return (v / 255.0f) * 75.0f; // scale 0-255 -> 0-60 meters
+}
+
+// Return height at an arbitrary terrain point (px, pz) using bilinear interpolation.
+// px and pz are in grid-local coordinates (i.e. the same space as h(int,int)).
+float hf(float px, float pz) {
+	int x1 = (int)floor(px);
+	int x2 = x1 + 1;
+	int z1 = (int)floor(pz);
+	int z2 = z1 + 1;
+
+	float fx = px - x1; // fractional part along x
+	float fz = pz - z1; // fractional part along z
+
+	// Interpolate along z for each x column
+	float h_x1_z = h(x1, z1) * (1.0f - fz) + h(x1, z2) * fz;
+	float h_x2_z = h(x2, z1) * (1.0f - fz) + h(x2, z2) * fz;
+
+	// Interpolate along x
+	return h_x1_z * (1.0f - fx) + h_x2_z * fx;
 }
 
 void changeSize(int w, int h) {
@@ -80,14 +106,14 @@ void drawTerrain() {
 	glVertexPointer(3, GL_FLOAT, 0, 0);
 
 	// filled triangles
-	glColor3f(1.0f, 1.0f, 1.0f);
+	glColor3f(0.44f, 0.28f, 0.19f);
 	for (int row = 0; row < g_imgH - 1; ++row) {
 		int first = row * g_stripVerticesPerRow;
 		glDrawArrays(GL_TRIANGLE_STRIP, first, g_stripVerticesPerRow);
 	}
 
 	// wireframe overlay
-	glColor3f(0.0f, 0.0f, 0.0f);
+	glColor3f(0.1f, 0.1f, 0.1f);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	for (int row = 0; row < g_imgH - 1; ++row) {
 		int first = row * g_stripVerticesPerRow;
@@ -103,6 +129,19 @@ void drawTerrain() {
 
 
 
+void drawTree() {
+	glPushMatrix();
+	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
+	// Trunk
+	glColor3f(0.5f, 0.35f, 0.05f);
+	glutSolidCone(0.5, 2.0, 10, 10);
+	// Leaves
+	glTranslatef(0.0, 0.0, 1.0);
+	glColor3f(0.0f, 0.5f, 0.0f);
+	glutSolidCone(2.0, 5.0, 15, 10);
+	glPopMatrix();
+}
+
 void renderScene(void) {
 
 	float pos[4] = {-1.0, 1.0, 1.0, 0.0};
@@ -111,13 +150,36 @@ void renderScene(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
+	
+	// First Person Camera: compute looking direction (lx, ly, lz)
+	float lx = sin(alpha) * cos(beta);
+	float ly = sin(beta);
+	float lz = cos(alpha) * cos(beta);
+	
+	// Update height based on current (camX, camZ)
+	camY = hf(camX + g_imgW / 2.0f, camZ + g_imgH / 2.0f) + eyeHeight;
+
 	gluLookAt(camX, camY, camZ, 
-		      0.0,0.0,0.0,
-			  0.0f,1.0f,0.0f);
+		      camX + lx, camY + ly, camZ + lz,
+			  0.0f, 1.0f, 0.0f);
 
 	drawTerrain();
 
-	glutWireTeapot(2.5);
+	// Helper: convert world (wx, wz) -> grid coords, then get terrain height.
+	// drawTerrain translates by (-g_imgW/2, 0, -g_imgH/2), so:
+	//   grid_x = wx + g_imgW/2,  grid_z = wz + g_imgH/2
+	auto worldHeight = [](float wx, float wz) -> float {
+		return hf(wx + g_imgW / 2.0f, wz + g_imgH / 2.0f);
+	};
+
+	// --- Trees distributed randomly around the map ---
+	for (const auto& pos : g_treePositions) {
+		const float wy = worldHeight(pos.x, pos.z);
+		glPushMatrix();
+		glTranslatef(pos.x, wy, pos.z);
+		drawTree();
+		glPopMatrix();
+	}
 
 // End of frame
 	glutSwapBuffers();
@@ -126,8 +188,31 @@ void renderScene(void) {
 
 
 void processKeys(unsigned char key, int xx, int yy) {
+	float speed = 1.0f;
+	float lx = sin(alpha);
+	float lz = cos(alpha);
 
-// put code to process regular keys in here
+	switch (key) {
+		case 'w': case 'W':
+			camX += lx * speed;
+			camZ += lz * speed;
+			break;
+		case 's': case 'S':
+			camX -= lx * speed;
+			camZ -= lz * speed;
+			break;
+		case 'a': case 'A':
+			camX -= cos(alpha) * speed;
+			camZ += sin(alpha) * speed;
+			break;
+		case 'd': case 'D':
+			camX += cos(alpha) * speed;
+			camZ -= sin(alpha) * speed;
+			break;
+		case 27: // ESC
+			exit(0);
+	}
+	glutPostRedisplay();
 }
 
 
@@ -145,16 +230,6 @@ void processMouseButtons(int button, int state, int xx, int yy) {
 			tracking = 0;
 	}
 	else if (state == GLUT_UP) {
-		if (tracking == 1) {
-			alpha += (xx - startX);
-			beta += (yy - startY);
-		}
-		else if (tracking == 2) {
-			
-			r -= yy - startY;
-			if (r < 3)
-				r = 3.0;
-		}
 		tracking = 0;
 	}
 }
@@ -162,40 +237,24 @@ void processMouseButtons(int button, int state, int xx, int yy) {
 
 void processMouseMotion(int xx, int yy) {
 
-	int deltaX, deltaY;
-	int alphaAux, betaAux;
-	int rAux;
-
 	if (!tracking)
 		return;
 
-	deltaX = xx - startX;
-	deltaY = yy - startY;
+	int deltaX = xx - startX;
+	int deltaY = yy - startY;
 
-	if (tracking == 1) {
+	// Update looking angles
+	alpha += deltaX * 0.005f;
+	beta  -= deltaY * 0.005f;
 
+	// Clamp vertical angle to prevent flipping (approx -85 to 85 degrees)
+	if (beta > 1.5f) beta = 1.5f;
+	if (beta < -1.5f) beta = -1.5f;
 
-		alphaAux = alpha + deltaX;
-		betaAux = beta + deltaY;
+	startX = xx;
+	startY = yy;
 
-		if (betaAux > 85.0)
-			betaAux = 85.0;
-		else if (betaAux < -85.0)
-			betaAux = -85.0;
-
-		rAux = r;
-	}
-	else if (tracking == 2) {
-
-		alphaAux = alpha;
-		betaAux = beta;
-		rAux = r - deltaY;
-		if (rAux < 3)
-			rAux = 3;
-	}
-	camX = rAux * sin(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
-	camZ = rAux * cos(alphaAux * 3.14 / 180.0) * cos(betaAux * 3.14 / 180.0);
-	camY = rAux * 							     sin(betaAux * 3.14 / 180.0);
+	glutPostRedisplay();
 }
 
 
@@ -203,7 +262,7 @@ void init() {
 
 	// Load image dimensions using DevIL and build a regular grid
 	ilInit();
-	const char *fname = "portugal.png";
+	const char *fname = "terreno1.png";
 	ILuint imgID;
 	ilGenImages(1, &imgID);
 	ilBindImage(imgID);
@@ -258,6 +317,15 @@ void init() {
 	glBindBuffer(GL_ARRAY_BUFFER, g_vbo);
 	glBufferData(GL_ARRAY_BUFFER, g_stripVertices.size() * sizeof(float), g_stripVertices.data(), GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	// Generate random tree positions (e.g., 300 trees)
+	srand(123); // fixed seed for consistency
+	g_treePositions.clear();
+	for (int i = 0; i < 300; ++i) {
+		float rx = (rand() % 1000) / 1000.0f * g_imgW - g_imgW / 2.0f;
+		float rz = (rand() % 1000) / 1000.0f * g_imgH - g_imgH / 2.0f;
+		g_treePositions.push_back({rx, rz});
+	}
 
 	// OpenGL settings
 	glEnable(GL_DEPTH_TEST);
