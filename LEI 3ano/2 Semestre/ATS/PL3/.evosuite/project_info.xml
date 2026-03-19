@@ -61,6 +61,63 @@
                 </coverage>
             </suite>
         </generation>
+        <generation>
+            <id>1</id>
+            <failed>false</failed>
+            <modified>true</modified>
+            <timeBudgetInSeconds>593</timeBudgetInSeconds>
+            <memoryInMB>1000</memoryInMB>
+            <std_err_CLIENT>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/Turma/std_err_CLIENT.log</std_err_CLIENT>
+            <std_out_CLIENT>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/Turma/std_out_CLIENT.log</std_out_CLIENT>
+            <std_err_MASTER>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/Turma/std_err_MASTER.log</std_err_MASTER>
+            <std_out_MASTER>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/Turma/std_out_MASTER.log</std_out_MASTER>
+            <suite>
+                <fullPathOfTestSuite>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/tests/Turma_ESTest.java</fullPathOfTestSuite>
+                <numberOfTests>23</numberOfTests>
+                <totalNumberOfStatements>87</totalNumberOfStatements>
+                <totalEffortInSeconds>303</totalEffortInSeconds>
+                <coverage>
+                    <criterion>LineCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>1111111111111111111111111111111111111111111111111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>BranchCoverage</criterion>
+                    <coverageValue>0.94</coverageValue>
+                    <coverageBitString>11111111111111111111111111101101111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>ExceptionCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>111111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>WeakMutationScore</criterion>
+                    <coverageValue>0.94</coverageValue>
+                    <coverageBitString>111111111110111111101111111111111111111111011111111101111111111111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>OutputCoverage</criterion>
+                    <coverageValue>0.68</coverageValue>
+                    <coverageBitString>1110110110011110110</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>MethodCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11111111111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>MethodNoExceptionCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11111111111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>CBranchCoverage</criterion>
+                    <coverageValue>0.94</coverageValue>
+                    <coverageBitString>11111111111111111111111111101011111</coverageBitString>
+                </coverage>
+            </suite>
+        </generation>
     </cut>
     <cut>
         <fullNameOfTargetClass>NotaInvalidaException</fullNameOfTargetClass>
@@ -77,6 +134,63 @@
             <std_out_MASTER>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_23_40/logs/NotaInvalidaException/std_out_MASTER.log</std_out_MASTER>
             <suite>
                 <fullPathOfTestSuite>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_23_40/tests/NotaInvalidaException_ESTest.java</fullPathOfTestSuite>
+                <numberOfTests>2</numberOfTests>
+                <totalNumberOfStatements>2</totalNumberOfStatements>
+                <totalEffortInSeconds>2</totalEffortInSeconds>
+                <coverage>
+                    <criterion>LineCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>1111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>BranchCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>ExceptionCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString></coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>WeakMutationScore</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString></coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>OutputCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString></coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>MethodCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>MethodNoExceptionCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>CBranchCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11</coverageBitString>
+                </coverage>
+            </suite>
+        </generation>
+        <generation>
+            <id>1</id>
+            <failed>false</failed>
+            <modified>true</modified>
+            <timeBudgetInSeconds>60</timeBudgetInSeconds>
+            <memoryInMB>1000</memoryInMB>
+            <std_err_CLIENT>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/NotaInvalidaException/std_err_CLIENT.log</std_err_CLIENT>
+            <std_out_CLIENT>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/NotaInvalidaException/std_out_CLIENT.log</std_out_CLIENT>
+            <std_err_MASTER>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/NotaInvalidaException/std_err_MASTER.log</std_err_MASTER>
+            <std_out_MASTER>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/NotaInvalidaException/std_out_MASTER.log</std_out_MASTER>
+            <suite>
+                <fullPathOfTestSuite>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/tests/NotaInvalidaException_ESTest.java</fullPathOfTestSuite>
                 <numberOfTests>2</numberOfTests>
                 <totalNumberOfStatements>2</totalNumberOfStatements>
                 <totalEffortInSeconds>2</totalEffortInSeconds>
@@ -183,6 +297,63 @@
                 </coverage>
             </suite>
         </generation>
+        <generation>
+            <id>1</id>
+            <failed>false</failed>
+            <modified>true</modified>
+            <timeBudgetInSeconds>486</timeBudgetInSeconds>
+            <memoryInMB>1000</memoryInMB>
+            <std_err_CLIENT>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/Aluno/std_err_CLIENT.log</std_err_CLIENT>
+            <std_out_CLIENT>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/Aluno/std_out_CLIENT.log</std_out_CLIENT>
+            <std_err_MASTER>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/Aluno/std_err_MASTER.log</std_err_MASTER>
+            <std_out_MASTER>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/Aluno/std_out_MASTER.log</std_out_MASTER>
+            <suite>
+                <fullPathOfTestSuite>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/tests/Aluno_ESTest.java</fullPathOfTestSuite>
+                <numberOfTests>25</numberOfTests>
+                <totalNumberOfStatements>56</totalNumberOfStatements>
+                <totalEffortInSeconds>251</totalEffortInSeconds>
+                <coverage>
+                    <criterion>LineCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>1111111111111111111111111111111111111111111111111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>BranchCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>111111111111111111111111111111111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>ExceptionCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>WeakMutationScore</criterion>
+                    <coverageValue>0.99</coverageValue>
+                    <coverageBitString>110111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>OutputCoverage</criterion>
+                    <coverageValue>0.73</coverageValue>
+                    <coverageBitString>1011111011111011011010</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>MethodCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11111111111111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>MethodNoExceptionCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11111111111111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>CBranchCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>111111111111111111111111111111111</coverageBitString>
+                </coverage>
+            </suite>
+        </generation>
     </cut>
     <cut>
         <fullNameOfTargetClass>AlunoInexistenteException</fullNameOfTargetClass>
@@ -199,6 +370,63 @@
             <std_out_MASTER>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_23_40/logs/AlunoInexistenteException/std_out_MASTER.log</std_out_MASTER>
             <suite>
                 <fullPathOfTestSuite>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_23_40/tests/AlunoInexistenteException_ESTest.java</fullPathOfTestSuite>
+                <numberOfTests>2</numberOfTests>
+                <totalNumberOfStatements>2</totalNumberOfStatements>
+                <totalEffortInSeconds>2</totalEffortInSeconds>
+                <coverage>
+                    <criterion>LineCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>1111</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>BranchCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>ExceptionCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString></coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>WeakMutationScore</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString></coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>OutputCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString></coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>MethodCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>MethodNoExceptionCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11</coverageBitString>
+                </coverage>
+                <coverage>
+                    <criterion>CBranchCoverage</criterion>
+                    <coverageValue>1.0</coverageValue>
+                    <coverageBitString>11</coverageBitString>
+                </coverage>
+            </suite>
+        </generation>
+        <generation>
+            <id>1</id>
+            <failed>false</failed>
+            <modified>true</modified>
+            <timeBudgetInSeconds>60</timeBudgetInSeconds>
+            <memoryInMB>1000</memoryInMB>
+            <std_err_CLIENT>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/AlunoInexistenteException/std_err_CLIENT.log</std_err_CLIENT>
+            <std_out_CLIENT>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/AlunoInexistenteException/std_out_CLIENT.log</std_out_CLIENT>
+            <std_err_MASTER>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/AlunoInexistenteException/std_err_MASTER.log</std_err_MASTER>
+            <std_out_MASTER>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/logs/AlunoInexistenteException/std_out_MASTER.log</std_out_MASTER>
+            <suite>
+                <fullPathOfTestSuite>/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/ATS/PL3/.evosuite/tmp_2026_03_12_16_41_17/tests/AlunoInexistenteException_ESTest.java</fullPathOfTestSuite>
                 <numberOfTests>2</numberOfTests>
                 <totalNumberOfStatements>2</totalNumberOfStatements>
                 <totalEffortInSeconds>2</totalEffortInSeconds>
