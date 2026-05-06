@@ -1,0 +1,3 @@
+/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/CG/PL/Aula12/src/CMakeFiles/class2.dir
+/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/CG/PL/Aula12/src/CMakeFiles/edit_cache.dir
+/Users/hugo/Documents/LEI/LEI 3ano/2 Semestre/CG/PL/Aula12/src/CMakeFiles/rebuild_cache.dir
